@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="directorio.list">
+      <field name="name">directorio list</field>
+      <field name="model">directorio.directorio</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="directorio.action_window">
+      <field name="name">directorio window</field>
+      <field name="res_model">directorio.directorio</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="directorio.action_server">
+      <field name="name">directorio server</field>
+      <field name="model_id" ref="model_directorio_directorio"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="directorio" id="directorio.menu_root"/>
+    <!-- menu categories -->
+
+    <menuitem name="Inicio" id="directorio.menu_1" parent="directorio.menu_root"/>
+    <!-- actions -->
+
+    <menuitem name="Referidos" id="directorio.menu_1_list" parent="directorio.menu_1"
+              action="directorio.action_window"/>
+    <menuitem name="Contactos" id="directorio.menu_2_list" parent="directorio.menu_1"
+              action="directorio.action_window"/>
+
+  </data>
+</odoo>
