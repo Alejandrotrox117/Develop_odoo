@@ -6,8 +6,11 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    ci = fields.Char('Cédula') 
-    gps = fields.Char('Dirección GPS') 
+    ci = fields.Char('Cédula')
+    gps = fields.Char('Dirección GPS')
+
+    user = fields.One2many('res.users', 'partner_id')
+    user_count = fields.Integer(compute='_compute_user_count')
 
     def create_user(self):
         group_id = self.env['ir.model.data']._xmlid_to_res_id('domestico.domestico_group_user', raise_if_not_found=False)
@@ -29,6 +32,11 @@ class ResPartner(models.Model):
             'new_passwd': '12345'
         }
 
-        self.env['change.password.user'].create(password_user).change_password_button()
+        self.env['change.password.user'].create(
+            password_user).change_password_button()
 
         print("new user created")
+
+    def _compute_user_count(self):
+        for record in self:
+            record.user_count = len(record.user)
