@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_domestico">
+            <field name="name">Domestico</field>
+            <field name="description">The Domestico Applilcation</field>
+            <field name="sequence">20</field>
+    </record>
+
+     <record id="domestico_group_user" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="category_id" ref="module_category_domestico"/>
+        <field name="implied_ids" eval="[(ref('base.group_user'))]"/>
+    </record>
+
+     <record id="domestico_group_manager" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="module_category_domestico"/>
+        <field name="implied_ids" eval="[(ref('domestico_group_user'))]"/>
+    </record>
+    
+</odoo>

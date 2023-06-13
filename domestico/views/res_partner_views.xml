@@ -6,6 +6,12 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+
+              <xpath expr="//div[@role='alert']" position="before">
+                <header>
+                  <button name="create_user" type="object" string="Crear usuario" class="oe_highlight"/>
+                </header>
+              </xpath>
               <xpath expr="//field[@name='website']" position="attributes">
                 <attribute name="attrs">{'invisible': [('is_company','=', False)]}</attribute>
               </xpath>
