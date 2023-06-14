@@ -12,6 +12,11 @@ class ResPartner(models.Model):
     user = fields.One2many('res.users', 'partner_id')
     user_count = fields.Integer(compute='_compute_user_count')
 
+    type_partner = fields.Selection(selection=[('contact', 'Contact'), ('user', 'Usuario')], default='contact')
+    state = fields.Selection(selection=[('rejected', 'Rechazado'), ('refer', 'Referido'), ('user', 'Usuario')], string="Statu")
+
+    refer_id = fields.Integer(inverse="_inverse_refer_id")
+
     def create_user(self):
         group_id = self.env['ir.model.data']._xmlid_to_res_id('domestico.domestico_group_user', raise_if_not_found=False)
 
@@ -35,8 +40,16 @@ class ResPartner(models.Model):
         self.env['change.password.user'].create(
             password_user).change_password_button()
 
-        print("new user created")
+        self.state = 'user'
+    
+    def rejected_partner(self):
+        self.active = False
+        self.state = 'rejected'
 
     def _compute_user_count(self):
         for record in self:
             record.user_count = len(record.user)
+    
+    def _inverse_refer_id(self):
+        for record in self:
+            record.parent_id = self.env['res.users'].browse(record.refer_id).partner_id.id or False

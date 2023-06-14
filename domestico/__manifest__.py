@@ -26,10 +26,10 @@
     'data': [
         'security/domestico_groups.xml',
         # 'security/ir.model.access.csv',
-        #'views/views.xml',
         'views/res_partner_views.xml',
         'views/templates.xml',
         'views/product_template_view.xml',
+        'views/domestico_menus.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
