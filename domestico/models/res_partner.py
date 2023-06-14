@@ -7,4 +7,4 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     ci = fields.Char('Cédula') 
-    gps = fields.Char('Dirección GPS') 
+    gps = fields.Char('Dirección GPS')

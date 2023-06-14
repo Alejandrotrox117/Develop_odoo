@@ -41,6 +41,6 @@
                 <field name="create_date" />
               </xpath>
             </field>
-        </record>
+        </record> 
     </data>
 </odoo>
