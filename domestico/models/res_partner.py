@@ -8,3 +8,10 @@ class ResPartner(models.Model):
 
     ci = fields.Char('Cédula') 
     gps = fields.Char('Dirección GPS')
+
+
+class AccountPayment(models.Model):
+    _inherit = 'account.payment'
+    
+    referencia = fields.Char(string="Referencia Bancaria")
+    

@@ -26,8 +26,9 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/res_partner_views.xml',
-        'views/product_template_view.xml',
-        'views/account_move_form_custom.xml',
+        'views/Products/product_template_view.xml',
+        'views/Invoicing/account_move_form_custom.xml',
+        'views/Invoicing/payments/account_payments_view.xml',
         ],
     # only loaded in demonstration mode
     'demo': [
