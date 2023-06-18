@@ -10,8 +10,14 @@ class ResPartner(models.Model):
     gps = fields.Char('Dirección GPS')
 
 
+#Modelo de pagos en el modulo de facturacion
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
     
-    referencia = fields.Char(string="Referencia Bancaria")
+    referencia = fields.Char(string="Referencia de transferencia",required=True)
     
+# class AccountPaymentRegister(models.TransientModel):
+#     _inherit = 'account.payment.register'
+
+#     referencia = fields.Char(string='Referencia de transferencia')
+   
