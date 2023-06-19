@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-
+import logging
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -10,7 +10,6 @@ class ResPartner(models.Model):
     gps = fields.Char('Dirección GPS')
 
     user = fields.One2many('res.users', 'partner_id')
-    user_count = fields.Integer(compute='_compute_user_count')
 
     type_partner = fields.Selection(selection=[('contact', 'Contact'), ('user', 'Usuario')], default='contact')
     state = fields.Selection(selection=[('rejected', 'Rechazado'), ('refer', 'Referido'), ('user', 'Usuario')], string="Statu")
@@ -45,11 +44,15 @@ class ResPartner(models.Model):
     def rejected_partner(self):
         self.active = False
         self.state = 'rejected'
-
-    def _compute_user_count(self):
-        for record in self:
-            record.user_count = len(record.user)
     
     def _inverse_refer_id(self):
         for record in self:
             record.parent_id = self.env['res.users'].browse(record.refer_id).partner_id.id or False
+
+    @api.model
+    def search(self, domain=[], **kwarg):
+        # if self.env.context.get('params'):
+        #     if self.env.context.get('params')['menu_id'] == self.env['ir.model.data']._xmlid_to_res_id('domestico.domestico_menu_root', raise_if_not_found=False):
+        #         if self.env.user.has_group('domestico.domestico_group_user') and not self.env.user.has_group('domestico.domestico_group_manager'):
+        #             domain = [('refer_id', '=', self.env.user.id)] + (domain or [])
+        return super(ResPartner, self).search(domain, **kwarg)

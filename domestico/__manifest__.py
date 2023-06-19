@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','product', 'account'],
+    'depends': ['base','product', 'account', 'sale'],
 
     # always loaded
     'data': [
@@ -35,4 +35,5 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'post_init_hook': 'create_update_bcv_job'
 }
