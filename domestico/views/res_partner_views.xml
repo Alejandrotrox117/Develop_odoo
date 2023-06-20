@@ -1,5 +1,16 @@
 <odoo>
     <data>
+      <record model="ir.ui.menu" id="contacts.menu_contacts">
+        <field name="name">Directorio</field>
+      </record>
+
+      <record model="ir.ui.menu" id="contacts.res_partner_menu_contacts">
+        <field name="name">Directorio</field>
+      </record>
+      
+      <record model="ir.actions.act_window" id="contacts.action_contacts" >
+        <field name="name">Directorio</field>
+      </record>
      <!-- Heredando la vista form de mi.modelo -->
         <record model="ir.ui.view" id="domestico_res_partner_kanban_inherit">
           <field name="name">domestico.res.partner.kanban.inherit</field>
