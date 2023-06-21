@@ -11,8 +11,8 @@
         'views/res_partner_views.xml',
         'views/product_template_view.xml',
         'views/account_move_form_custom.xml',
-        'views/payments/account_payments_view.xml',
-        'views/product_template_view.xml',
+        'views/account_payments_view.xml',
+        # 'views/product_template_view.xml',
         'views/domestico_menus.xml',
         ],
     # only loaded in demonstration mode
