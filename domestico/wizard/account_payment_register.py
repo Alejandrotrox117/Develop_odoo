@@ -3,7 +3,7 @@ from odoo import api, fields, models
 class AccountPaymentRegister(models.TransientModel):
     _inherit = 'account.payment.register'
 
-    reference = fields.Char("referencia")
+    reference = fields.Char("Referencia")
     def _init_payments(self, to_process, edit_mode=False):
         for payment in to_process:
             payment['create_vals'].update({
