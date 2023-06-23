@@ -12,6 +12,20 @@
         <field name="name">Directorio</field>
       </record>
      <!-- Heredando la vista form de mi.modelo -->
+        <record model="ir.ui.view" id="domestico_res_partner_kanban_inherit">
+          <field name="name">domestico.res.partner.kanban.inherit</field>
+          <field name="model">res.partner</field>
+          <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+          <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="attributes">
+              <attribute name="name">name</attribute>
+            </xpath>
+            <xpath expr="//strong[hasclass('o_kanban_record_title')]//field[@name='display_name']" position="attributes">
+              <attribute name="name">name</attribute>
+            </xpath>
+          </field>
+        </record>
+
         <record model="ir.ui.view" id="domestico_res_partner_form_inherit">
             <field name="name">domestico.res.partner.form.inherit</field>
             <field name="model">res.partner</field>
@@ -20,12 +34,12 @@
 
               <xpath expr="//div[@role='alert']" position="before">
                 <header>
-                  <field name="user_count" invisible="1" />
+                  <field name="user" invisible="1" />
                   <field name="type_partner" invisible="1" />
                   <button name="create_user" type="object" string="Crear usuario" class="oe_highlight"
-                    attrs="{'invisible': ['|', '|', ('user_count', '>', 0), ('type_partner', '=', 'contact'), ('state', '!=', 'refer')]}" />
+                    attrs="{'invisible': ['|', '|', ('user', '!=', []), ('type_partner', '=', 'contact'), ('state', '!=', 'refer')]}" />
                   <button name="rejected_partner" type="object" string="rechazar referido" 
-                    attrs="{'invisible': ['|', '|', ('user_count', '>', 0), ('type_partner', '=', 'contact'), ('state', '!=', 'refer')]}" />
+                    attrs="{'invisible': ['|', '|', ('user', '!=', []), ('type_partner', '=', 'contact'), ('state', '!=', 'refer')]}" />
                    <field name="state" widget="statusbar" attrs="{'invisible': [('type_partner', '=', 'contact')]}"/>
                 </header>
               </xpath>
@@ -55,7 +69,6 @@
                 <attribute name="string">RIF</attribute>
                 <attribute name="attrs"/>
               </xpath>
-              
 
               <xpath expr="//div[hasclass('o_address_format')]" position="inside">
                 <field name="gps" placeholder="GPS e.g. 000000,-12300410"/>
@@ -76,13 +89,18 @@
                 <attribute name="invisible">1</attribute>
               </xpath>
 
+              <xpath expr="//page[@name='contact_addresses']" position="attributes">
+                <attribute name="attrs">{'invisible': [('child_ids', '=', [])]}</attribute>
+                <attribute name="string">Referidos</attribute>
+              </xpath>
+
               <xpath expr="//page[@name='internal_notes']" position="inside">
                 <label for="create_date" string="Fecha de creación" />
                 <field name="create_date" />
               </xpath>
-              <!-- <xpath expr="//page[@name='internal_notes']" position="attributes">
-                <attribute name="attrs">{'invisible': [()]}</attribute>
-              </xpath> -->
+              <xpath expr="//page[@name='internal_notes']" position="attributes">
+                <attribute name="groups">domestico.domestico_group_manager</attribute>
+              </xpath>
 
             </field>
         </record>

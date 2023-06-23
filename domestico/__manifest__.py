@@ -11,6 +11,14 @@
         'views/domestico_product_assignment_views.xml',
         'views/res_partner_views.xml',
         'views/product_template_view.xml',
+        'views/account_payment_view.xml',
         'views/domestico_menus.xml',
-    ]
+
+        'wizard/account_payment_register_view.xml',
+    ],
+    # only loaded in demonstration mode
+    'demo': [
+        'demo/demo.xml',
+    ],
+    'post_init_hook': 'create_update_bcv_job'
 }
