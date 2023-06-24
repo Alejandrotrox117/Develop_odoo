@@ -1,21 +1,18 @@
 <odoo>
     <data>
-        <!-- Agregar campo 'referencia_pago' en la vista 'account.view_move_form' -->
         <record id="account_move_form_inherit" model="ir.ui.view">
             <field name="name">account.move.form.inherit</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                <field name="payment_reference" position="attributes">
+                <xpath expr="//field[@name='payment_reference']"  position="attributes">
                     <attribute name="invisible">1</attribute>
-                </field>
-                <xpath expr="//field[@name='ref']" position="replace">
-                    <field name="referencia" ></field>
-                    
-                </xpath>
-
-            </field>
+                   <xpath expr="//group[@name='group1']" position="inside">
+                <field name="referencia"/>
+                    </xpath>
+                </xpath> 
+                    </field>
         </record>
-
+        
     </data>
 </odoo>
