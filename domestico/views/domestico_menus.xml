@@ -2,7 +2,7 @@
   <data>
 
     <!-- Top menu item -->
-z
+
     <menuitem id="domestico_menu_root" name="Domestico"
         groups="domestico.domestico_group_user,domestico.domestico_group_manager"
     >

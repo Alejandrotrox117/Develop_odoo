@@ -4,7 +4,7 @@
     'author': "My Company",
     'category': 'Uncategorized',
     'version': '0.1',
-    'depends': ['base','product', 'stock', 'account', 'contacts', 'sale'],
+    'depends': ['base','product', 'stock', 'account', 'contacts', 'sale','web'],
     'data': [
         'security/domestico_groups.xml',
         'security/ir.model.access.csv',
@@ -13,6 +13,7 @@
         'views/product_template_view.xml',
         'views/account_payment_view.xml',
         'views/domestico_menus.xml',
+        'views/res_partner_bank.xml',
 
         'wizard/account_payment_register_view.xml',
     ],

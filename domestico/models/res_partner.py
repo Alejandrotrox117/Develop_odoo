@@ -81,3 +81,12 @@ class ResPartner(models.Model):
         #         if self.env.user.has_group('domestico.domestico_group_user') and not self.env.user.has_group('domestico.domestico_group_manager'):
         #             domain = [('refer_id', '=', self.env.user.id)] + (domain or [])
         return super(ResPartner, self).search(domain, **kwarg)
+
+    
+
+
+
+
+
+
+
