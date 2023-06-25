@@ -8,9 +8,9 @@
     >
         <menuitem id="domestico_product_assignment_menu_action" name="Solicitud de Electrodomestico"
             action="domestico.action_domestico_product_assignment" sequence="1"/>
-
+<!-- 
         <menuitem id="domestico_directory_menu_action" name="Referidos" 
-            action="domestico.action_domestico_directory" sequence="2"/>
+            action="domestico.action_domestico_directory" sequence="2"/> -->
     </menuitem>
 
     <menuitem id="domestico_product_menu" name="Electrodomesticos" 
@@ -23,6 +23,7 @@
             action="domestico.action_domestico_product_assignment" sequence="2"/>
 
     </menuitem>
+
     <!-- menu categories -->
 <!--
     <menuitem name="Menu 2" id="domestico.menu_2" parent="domestico.menu_root"/>

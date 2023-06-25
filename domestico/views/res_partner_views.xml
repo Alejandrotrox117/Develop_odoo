@@ -1,173 +1,204 @@
 <odoo>
-    <data>
-      <record model="ir.ui.menu" id="contacts.menu_contacts">
-        <field name="name">Directorio</field>
-      </record>
+  <data>
+    <record model="ir.ui.menu" id="contacts.menu_contacts">
+      <field name="name">Directorio</field>
+    </record>
 
-      <record model="ir.ui.menu" id="contacts.res_partner_menu_contacts">
-        <field name="name">Directorio</field>
-      </record>
-      
-      <record model="ir.actions.act_window" id="contacts.action_contacts" >
-        <field name="name">Directorio</field>
-      </record>
-     <!-- Heredando la vista form de mi.modelo -->
-        <record model="ir.ui.view" id="domestico_res_partner_kanban_inherit">
-          <field name="name">domestico.res.partner.kanban.inherit</field>
-          <field name="model">res.partner</field>
-          <field name="inherit_id" ref="base.res_partner_kanban_view"/>
-          <field name="arch" type="xml">
-            <xpath expr="//field[@name='display_name']" position="attributes">
-              <attribute name="name">name</attribute>
-            </xpath>
-            <xpath expr="//strong[hasclass('o_kanban_record_title')]//field[@name='display_name']" position="attributes">
-              <attribute name="name">name</attribute>
-            </xpath>
-          </field>
-        </record>
+    <record model="ir.ui.menu" id="contacts.res_partner_menu_contacts">
+      <field name="name">Directorio</field>
+    </record>
 
-        <record model="ir.ui.view" id="domestico_res_partner_form_inherit">
-            <field name="name">domestico.res.partner.form.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
+    <record model="ir.actions.act_window" id="contacts.action_contacts">
+      <field name="name">Directorio</field>
+      <field name="context">{'default_is_company': False}</field>
+    </record>
 
-              <xpath expr="//div[@role='alert']" position="before">
-                <header>
-                  <field name="user" invisible="1" />
-                  <field name="type_partner" invisible="1" />
-                  <button name="create_user" type="object" string="Crear usuario" class="oe_highlight"
-                    attrs="{'invisible': ['|', '|', ('user', '!=', []), ('type_partner', '=', 'contact'), ('state', '!=', 'refer')]}" />
-                  <button name="rejected_partner" type="object" string="rechazar referido" 
-                    attrs="{'invisible': ['|', '|', ('user', '!=', []), ('type_partner', '=', 'contact'), ('state', '!=', 'refer')]}" />
-                   <field name="state" widget="statusbar" attrs="{'invisible': [('type_partner', '=', 'contact')]}"/>
-                </header>
-              </xpath>
+    <record model="ir.ui.view" id="domestico_res_partner_form_fields_inherit">
+      <field name="name">domestico.res.partner.form.fields.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
 
-              <xpath expr="//field[@name='website']" position="attributes">
-                <attribute name="attrs">{'invisible': [('is_company','=', False)]}</attribute>
-              </xpath>
+        <xpath expr="//div[@name='button_box']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//field[@name='parent_id']" position="attributes">
-                <attribute name="attrs">{'readonly': [('type_partner','=', 'user')]}</attribute>
-              </xpath>
-              <xpath expr="//field[@name='parent_id']" position="before">
-                <label for="parent_id" string="Referido por" 
-                  attrs="{'invisible': [('type_partner','=', 'contact')]}"/>
-              </xpath>
+        <xpath expr="//field[@name='company_type']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//field[@name='company_type']" position="attributes">
-                <attribute name="attrs">{'invisible': [('type_partner', '=', 'user')]}</attribute>
-              </xpath>
+        <xpath expr="//field[@name='function']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//span[@name='address_name']" position="before">
-                <field name="ci" attrs="{'invisible': [('is_company','=', True)]}" />
-                <xpath expr="//field[@name='vat']" position="move" />
-              </xpath>
+        <xpath expr="//field[@name='category_id']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//field[@name='vat']" position="attributes">
-                <attribute name="string">RIF</attribute>
-                <attribute name="attrs"/>
-              </xpath>
+        <xpath expr="//field[@name='title']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//div[hasclass('o_address_format')]" position="inside">
-                <field name="gps" placeholder="GPS e.g. 000000,-12300410"/>
-              </xpath>
-              
-              <xpath expr="//div[@name='button_box']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-              
-              <xpath expr="//page[@name='sales_purchases']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-              
-              <xpath expr="//page[@name='accounting']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-              <xpath expr="//page[@name='accounting_disabled']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
+        <xpath expr="//field[@name='lang']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//page[@name='contact_addresses']" position="attributes">
-                <attribute name="attrs">{'invisible': [('child_ids', '=', [])]}</attribute>
-                <attribute name="string">Referidos</attribute>
-              </xpath>
+        <xpath expr="//page[@name='sales_purchases']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-              <xpath expr="//page[@name='internal_notes']" position="inside">
-                <label for="create_date" string="Fecha de creación" />
-                <field name="create_date" />
-              </xpath>
-              <xpath expr="//page[@name='internal_notes']" position="attributes">
-                <attribute name="groups">domestico.domestico_group_manager</attribute>
-              </xpath>
+        <xpath expr="//page[@name='accounting']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-            </field>
-        </record>
-      
-        <record id="view_domestico_directory_tree" model="ir.ui.view">
-          <field name="name">res.partner.directory.tree</field>
-          <field name="model">res.partner</field>
-          <field eval="8" name="priority"/>
-          <field name="arch" type="xml">
-              <tree string="Directorio" sample="1" multi_edit="1">
+        <xpath expr="//page[@name='accounting_disabled']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+
+        <xpath expr="//span[@name='address_name']" position="replace">
+          <span class="o_form_label o_td_label" name="address_name">
+            <field name="type" invisible="1"/>
+            <b>Dirección</b>
+          </span>
+        </xpath>
+
+        <xpath expr="//field[@name='website']" position="attributes">
+          <attribute name="attrs">{'invisible': [('is_company','=', False)]}</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='parent_id']" position="attributes">
+          <attribute name="attrs">{'readonly': [('type_partner','=', 'user')]}</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='parent_id']" position="attributes">
+          <attribute name="attrs">{'invisible': [('parent_id', '=', False)]}</attribute>
+          <attribute name="readonly">1</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='parent_id']" position="before">
+          <label for="parent_id" string="Referido por" attrs="{'invisible': [('parent_id', '=', False)]}"/>
+        </xpath>
+
+        <xpath expr="//field[@name='function']" position="before">
+          <field name="ci" attrs="{'invisible': [('is_company','=', True)]}" />
+          <xpath expr="//field[@name='vat']" position="move" />
+        </xpath>
+
+        <xpath expr="//field[@name='vat']" position="attributes">
+          <attribute name="string">RIF</attribute>
+          <attribute name="attrs"/>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_address_format')]" position="inside">
+          <field name="gps" placeholder="GPS e.g. 000000,-12300410"/>
+        </xpath>
+
+        <xpath expr="//field[@name='child_ids']" position="attributes">
+          <attribute name="context">{'default_parent_id': active_id, 'default_is_company': False}</attribute>
+        </xpath>
+
+        <xpath expr="//page[@name='contact_addresses']" position="attributes">
+          <attribute name="string">Referidos</attribute>
+        </xpath>
+
+        <xpath expr="//page[@name='internal_notes']" position="inside">
+          <label for="create_date" string="Fecha de creación" />
+          <field name="create_date" />
+        </xpath>
+
+        <xpath expr="//page[@name='internal_notes']" position="attributes">
+          <attribute name="groups">domestico.domestico_group_manager</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_address_format')]" position="replace">
+          <div class="o_address_format">
+            <field name="street" placeholder="Street..." class="o_address_street" />
+            <field name="street2" placeholder="Street 2..." class="o_address_street" />
+            <field name="city" placeholder="City" class="o_address_city" />
+            <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+            <field name="zip" placeholder="ZIP" class="o_address_zip" />
+            <div name="partner_address_country" class="d-flex justify-content-between">
+              <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}" />
+            </div>
+          </div>
+        </xpath>
+
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="domestico_res_partner_form_inherit">
+      <field name="name">domestico.res.partner.form.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="domestico.domestico_res_partner_form_fields_inherit"/>
+      <field name="arch" type="xml">
+
+        <xpath expr="//div[@role='alert']" position="before">
+          <header>
+            <field name="user_account" invisible="1"/>
+            <button name="create_user_account" type="object" string="Crear cuenta de usuario" 
+                    class="oe_highlight" attrs="{'invisible': [('user_account', '!=', False)]}"/>
+            <button name="view_user_account" type="object" string="Ver cuenta del usuario" 
+                    class="oe_highlight" attrs="{'invisible': [('user_account', '=', False)]}"/>
+          </header>
+        </xpath>
+    
+        <xpath expr="//page[@name='contact_addresses']//form" position="replace">
+          <form string="Referido">
+            <field name="parent_id" invisible="1"/>
+            <sheet>
+              <group>
+                <group>
+                  <field name="name" />
+                  <span class="o_form_label o_td_label" name="address_name">
+                      <b>Dirección</b>
+                  </span>
+                  <div class="o_address_format" name="div_address">
+                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                    <field name="city" placeholder="City" class="o_address_city"/>
+                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                  </div>
+                </group>
+                <group>
                   <field name="ci" />
-                  <field name="vat" readonly="1" string="RIF" />
-                  <field name="name" string="Name"/>
-                  <field name="phone" class="o_force_ltr" optional="show"/>
-                  <field name="email" optional="show"/>
-                  <field name="city" optional="show"/>
-                  <field name="state_id" optional="hide" readonly="1"/>
-                  <field name="parent_id" string="Referido por" optional="hide" readonly="1"/>
-                  <field name="country_id" optional="show" readonly="1"/>
-                  <field name="parent_id" invisible="1" readonly="1"/>
-                  <field name="active" invisible="1"/>
-                  <field name="state"/>
-              </tree>
-          </field>
-        </record>
+                  <field name="vat" string="RIF" />
+                  <field name="email" widget="email"/>
+                  <field name="phone" widget="phone"/>
+                  <field name="mobile" widget="phone"/>
+                  <field name="company_id" invisible="1"/>
+                </group>
+              </group>
+              <field name="lang" invisible="1"/>
+              <field name="user_id" invisible="1"/>
+            </sheet>
+          </form>
+        </xpath>
 
-        <record id="action_domestico_directory" model="ir.actions.act_window">
-          <field name="name">Referidos</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">res.partner</field>
-          <field name="view_mode">tree,form</field>
-          <field name="domain">
-            [
-              ('is_company', '=', False), 
-              ('active', 'in', [True, False]), 
-              ('type_partner','=', 'user'),
-            ]
-          </field>
-          <field name="context">
-            {
-              'default_type_partner': 'user', 
-              'default_state': 'refer',
-              'default_refer_id': uid
-            }
-          </field>
-          <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-              Create a Contact in your address book
-            </p><p>
-              Odoo helps you track all activities related to your contacts.
-            </p>
-          </field>
-        </record>
+      </field>
+    </record>
 
-        <record id="action_domestico_directory_view_tree" model="ir.actions.act_window.view">
-          <field name="sequence" eval="1"/>
-          <field name="view_mode">tree</field>
-          <field name="view_id" ref="domestico.view_domestico_directory_tree"/>
-          <field name="act_window_id" ref="domestico.action_domestico_directory"/>
-        </record>
-        
-        <record id="action_domestico_directory_view_form" model="ir.actions.act_window.view">
-          <field name="sequence" eval="2"/>
-          <field name="view_mode">form</field>
-          <field name="view_id" ref="domestico.domestico_res_partner_form_inherit"/>
-          <field name="act_window_id" ref="domestico.action_domestico_directory"/>
-        </record>
+    <record id="view_domestico_directory_tree" model="ir.ui.view">
+      <field name="name">res.partner.directory.tree</field>
+      <field name="model">res.partner</field>
+      <field eval="8" name="priority"/>
+      <field name="arch" type="xml">
+        <tree string="Directorio" sample="1" multi_edit="1">
+          <field name="ci" />
+          <field name="vat" readonly="1" string="RIF" />
+          <field name="name" string="Name"/>
+          <field name="phone" class="o_force_ltr" optional="show"/>
+          <field name="email" optional="show"/>
+          <field name="city" optional="show"/>
+          <field name="state_id" optional="hide" readonly="1"/>
+          <field name="parent_id" string="Referido por" optional="hide" readonly="1"/>
+          <field name="country_id" optional="show" readonly="1"/>
+          <field name="parent_id" invisible="1" readonly="1"/>
+          <field name="active" invisible="1"/>
+        </tree>
+      </field>
+    </record>
 
-    </data>
+  </data>
 </odoo>
