@@ -15,7 +15,7 @@
      <record id="domestico_group_manager" model="res.groups">
         <field name="name">Administrador</field>
         <field name="category_id" ref="module_category_domestico"/>
-        <field name="implied_ids" eval="[(4, ref('domestico_group_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('domestico_group_user')), (4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
     <record id="domestico_user_group_record_rule" model="ir.rule">
