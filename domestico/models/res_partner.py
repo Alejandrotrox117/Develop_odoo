@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-import logging
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    user_account = fields.Many2one('res.users')
     ci = fields.Char('Cédula')
     gps = fields.Char('Dirección GPS')
-    
-    user = fields.One2many('res.users', 'partner_id')
-
-    type_partner = fields.Selection(selection=[('contact', 'Contact'), ('user', 'Usuario')], default='contact')
-    state = fields.Selection(selection=[('rejected', 'Rechazado'), ('refer', 'Referido'), ('user', 'Usuario')], string="Statu")
-
-    refer_id = fields.Integer(inverse="_inverse_refer_id")
 
     names = fields.Char('Nombres', 
                         compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
@@ -41,7 +34,7 @@ class ResPartner(models.Model):
         for record in self:
             record.name = record.names + " " + record.surnames
 
-    def create_user(self):
+    def create_user_account(self):
         group_id = self.env['ir.model.data']._xmlid_to_res_id('domestico.domestico_group_user', raise_if_not_found=False)
 
         user = {
@@ -50,6 +43,7 @@ class ResPartner(models.Model):
             'company_id': self.env.company.id,
             'groups_id': [group_id]
         }
+
         new_user = self.env['res.users'].create(user)
 
         psswd_wizard = self.env['change.password.wizard'].create({})
@@ -64,29 +58,19 @@ class ResPartner(models.Model):
         self.env['change.password.user'].create(
             password_user).change_password_button()
 
-        self.state = 'user'
-    
-    def rejected_partner(self):
-        self.active = False
-        self.state = 'rejected'
-    
-    def _inverse_refer_id(self):
+        self.user_account = new_user.id
+
+    def view_user_account(self):
+        user_id = self.user_account.id
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.users',
+            'view_mode': 'form',
+            'res_id': user_id,
+            'target': 'current',
+            'view_id': self.env.ref('base.view_users_form').id
+        }
+        
+    def _compute_display_name(self):
         for record in self:
-            record.parent_id = self.env['res.users'].browse(record.refer_id).partner_id.id or False
-
-    @api.model
-    def search(self, domain=[], **kwarg):
-        # if self.env.context.get('params'):
-        #     if self.env.context.get('params')['menu_id'] == self.env['ir.model.data']._xmlid_to_res_id('domestico.domestico_menu_root', raise_if_not_found=False):
-        #         if self.env.user.has_group('domestico.domestico_group_user') and not self.env.user.has_group('domestico.domestico_group_manager'):
-        #             domain = [('refer_id', '=', self.env.user.id)] + (domain or [])
-        return super(ResPartner, self).search(domain, **kwarg)
-
-    
-
-
-
-
-
-
-
+            record.display_name = record.name if record.name else "Nuevo"
