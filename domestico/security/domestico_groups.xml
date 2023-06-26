@@ -18,6 +18,10 @@
         <field name="implied_ids" eval="[(4, ref('domestico_group_user'))]"/>
     </record>
 
+    <record id="make_invisible" model="res.groups">
+        <field name="name">Invisible</field>
+    </record>
+    
 <data noupdate="1">
 
     <record id="domestico_user_group_record_rule" model="ir.rule">

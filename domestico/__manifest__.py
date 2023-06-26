@@ -13,7 +13,7 @@
         'views/product_template_view.xml',
         'views/account_payment_view.xml',
         'views/domestico_menus.xml',
-        'views/res_partner_bank.xml',
+        'views/stock_menus_items.xml',
 
         'wizard/account_payment_register_view.xml',
     ],
