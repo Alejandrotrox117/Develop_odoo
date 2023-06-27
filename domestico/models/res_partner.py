@@ -74,3 +74,9 @@ class ResPartner(models.Model):
     def _compute_display_name(self):
         for record in self:
             record.display_name = record.name if record.name else "Nuevo"
+
+
+class ResPartnerBanks(models.Model):
+    _inherit = 'res.partner.bank'
+    partner_id = fields.Many2one('res.partner','Cliente')
+    ci=fields.Char("Cédula",related="partner_id.ci")
