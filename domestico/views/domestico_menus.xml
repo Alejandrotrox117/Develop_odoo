@@ -12,7 +12,10 @@
         <menuitem id="domestico_product_assignment_menu_action" name="Asignación de Electrodomestico" 
             action="domestico.domestico_product_assignment_action" sequence="2"/>
 
-        <menuitem id="domestico_config_menu_root" name="Configuración" sequence="3">
+        <menuitem id="domestico_product_pricelist_menu_action" name="Ciclos" 
+            action="domestico.domestico_product_pricelist_action" sequence="3"/>
+
+        <menuitem id="domestico_config_menu_root" name="Configuración" sequence="4">
 
             <menuitem id="domestico_client_type_menu_action" name="Tipo de cliente" 
                 action="domestico.domestico_client_type_action" sequence="1"/>

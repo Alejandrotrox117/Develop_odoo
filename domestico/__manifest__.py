@@ -14,6 +14,7 @@
         'views/account_payment_view.xml',
         'views/domestico_product_assignment_views.xml',
         'views/client_type_views.xml',
+        'views/product_pricelist_views.xml',
         'views/domestico_menus.xml',
 
         'wizard/account_payment_register_view.xml',
