@@ -16,6 +16,9 @@
         'views/client_type_views.xml',
         'views/product_pricelist_views.xml',
         'views/domestico_menus.xml',
+        'views/views_menus_items.xml',
+        'views/res_partner_bank_views.xml',
+
 
         'wizard/account_payment_register_view.xml',
     ],

@@ -1,0 +1,40 @@
+<odoo>
+<data>
+<record id="domestico_view_partner_bank_form_inherit_account" model="ir.ui.view">
+            <field name="name">res.partner.bank.form.inherit.account</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='acc_holder_name']" position="replace">
+                    <field name="ci"></field>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='allow_out_payment']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>         
+            </field>
+        </record>
+
+<record id="domestico_view_partner_bank_tree_account" model="ir.ui.view">
+            <field name="name">res.partner.bank.tree.account</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allow_out_payment']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bank_name']" position="attributes">
+                    <attribute name="string">Banco</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="string">Titular</attribute>
+                </xpath> 
+            </field>
+        </record>
+</data>
+</odoo>
