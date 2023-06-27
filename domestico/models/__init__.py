@@ -3,3 +3,4 @@
 from . import res_partner
 from . import res_currency
 from . import account_payment
+from . import client_type

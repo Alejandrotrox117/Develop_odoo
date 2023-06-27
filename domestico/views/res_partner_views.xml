@@ -89,6 +89,10 @@
           <attribute name="attrs"/>
         </xpath>
 
+        <xpath expr="//div[hasclass('o_address_format')]" position="after">
+          <field name="client_type_id" options="{'no_open': True, 'no_create': True, 'no_edit': True}" required="1" />
+        </xpath>
+
         <xpath expr="//div[hasclass('o_address_format')]" position="inside">
           <field name="gps" placeholder="GPS e.g. 000000,-12300410"/>
         </xpath>
