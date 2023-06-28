@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="domestico_product_pricelist_form_inherit">
+          <field name="name">domestico.product.pricelist.form.inherit</field>
+          <field name="model">product.pricelist</field>
+          <field name="inherit_id" ref="product.product_pricelist_view"/>
+          <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='currency_id']" position="replace">
+                <field name="warehouse_id" required="1"
+                    options="{'no_edit': True, 'no_create': True}"/>
+            </xpath>
+
+            <xpath expr="//page[@name='pricelist_config']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='pricelist_rules']" position="after">
+                <page string="Descuento por cliente">
+                    <field name="product_percent_id">
+                        <tree editable="botton">
+                            <field name="secuence" widget="handle" />
+                            <field name="client_type_id" width="200px"
+                                options="{'no_edit': True, 'no_create': True}" />
+                            <field name="percent" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+          </field>
+        </record>
+
+        <record id="domestico_product_pricelist_action" model="ir.actions.act_window">
+          <field name="name">Ciclos</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">product.pricelist</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

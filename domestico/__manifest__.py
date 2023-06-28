@@ -13,6 +13,8 @@
         'views/product_template_view.xml',
         'views/account_payment_view.xml',
         'views/domestico_product_assignment_views.xml',
+        'views/client_type_views.xml',
+        'views/product_pricelist_views.xml',
         'views/domestico_menus.xml',
         'views/views_menus_items.xml',
         'views/res_partner_bank_views.xml',

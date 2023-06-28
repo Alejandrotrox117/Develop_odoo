@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="domestico_client_type_list">
+          <field name="name">domestico.client.type.list</field>
+          <field name="model">client.type</field>
+          <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="secuence" widget="handle" />
+                <field name="name"/>
+            </tree>
+          </field>
+        </record>
+        
+        <record id="domestico_client_type_action" model="ir.actions.act_window">
+          <field name="name">Tipos de cliente</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">client.type</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

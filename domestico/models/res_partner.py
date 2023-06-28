@@ -5,6 +5,8 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    client_type_id = fields.Many2one('client.type', string='Tipo de cliente')
+
     user_account = fields.Many2one('res.users')
     ci = fields.Char('Cédula')
     gps = fields.Char('Dirección GPS')
