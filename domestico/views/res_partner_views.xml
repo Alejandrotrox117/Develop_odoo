@@ -145,7 +145,13 @@
                     class="oe_highlight" attrs="{'invisible': [('user_account', '=', False)]}"/>
           </header>
         </xpath>
-    
+
+        <xpath expr="//div[hasclass('oe_kanban_details')]" position="inside">
+          <div t-if="record.child_ids.raw_value.length > 0">
+            Referidos: <field name="child_ids" widget="many2many_tags" />
+          </div>
+        </xpath>
+        
         <xpath expr="//page[@name='contact_addresses']//form" position="replace">
           <form string="Referido">
             <field name="parent_id" invisible="1"/>
