@@ -1,0 +1,28 @@
+<odoo>
+<!--Reporte de albaran en el inventario-->
+<template id="report_returns_custom" inherit_id="stock.report_delivery_document">
+    <xpath expr="//table[@name='stock_move_line_table']" position="after">
+        <footer position="inside" style="position: absolute; bottom: -100px; left: 0; right: 0;">
+        <div class="row mb-6 text-center">
+            <div class="col-12">
+                <strong>Firma</strong>
+            </div>
+        </div>
+        <div class="row mb-6 text-center">
+            <div class="col-12">
+                <label><strong>______________________</strong></label>
+            </div>
+        </div>
+        </footer>
+    </xpath>
+<xpath expr="//div[@class='page']/h2" position="replace">
+    <h2>
+        <span>Return</span>
+        <span t-field="o.name"/>
+    </h2>
+</xpath>
+
+</template>
+<!-- <template id="report_returns_custom" inherit_id="stock.report_picking">
+</template> -->
+</odoo>

@@ -21,7 +21,8 @@
         'views/res_partner_bank_views.xml',        
 
         'wizard/account_payment_register_view.xml',
-        'reports/invoice_report.xml'
+        'reports/invoice_report.xml',
+        'reports/returns_report.xml'
     ],
     
     # only loaded in demonstration mode
