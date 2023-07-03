@@ -1,28 +1,76 @@
 <odoo>
-<!--Reporte de albaran en el inventario-->
-<template id="report_returns_custom" inherit_id="stock.report_delivery_document">
-    <xpath expr="//table[@name='stock_move_line_table']" position="after">
-        <footer position="inside" style="position: absolute; bottom: -100px; left: 0; right: 0;">
-        <div class="row mb-6 text-center">
-            <div class="col-12">
-                <strong>Firma</strong>
-            </div>
-        </div>
-        <div class="row mb-6 text-center">
-            <div class="col-12">
-                <label><strong>______________________</strong></label>
-            </div>
-        </div>
-        </footer>
-    </xpath>
-<xpath expr="//div[@class='page']/h2" position="replace">
-    <h2>
-        <span>Return</span>
-        <span t-field="o.name"/>
-    </h2>
-</xpath>
-
-</template>
-<!-- <template id="report_returns_custom" inherit_id="stock.report_picking">
-</template> -->
+    <!--Reporte de albaran en el inventario-->
+    <template id="report_returns_custom" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='outgoing_warehouse_address']" position="replace">
+        </xpath>
+        <xpath expr="//div[@class='row']" position="replace">
+            <table class="table  table-sm  o_main_table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Firma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="bg-white">
+                            <strong>
+                                <address class="mb-0 me-4 text-dark" t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                            </strong>
+                        </td>
+                        <td class="bg-white">
+                            <strong>
+                                <address class="mb-1  text-dark" t-field="o.partner_id.ci"
+                                    t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
+                            </strong>
+                        </td>
+                        <td class="bg-white">
+                            <strong>
+                                <address class="mb-0 text-dark" t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                            </strong>
+                        </td>
+                        <td class="bg-white">
+                            <div class="mb-2 m-2 text-dark">
+                                <label>
+                                    <strong>____________________________</strong>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+        <xpath expr="//table[@name='stock_move_line_table']" position="after">
+            <footer position="inside" style="position: absolute; bottom: -100px; left: 0; right: 0;">
+                <div class="row mb-6 text-center">
+                    <div class="col-12">
+                        <strong>Firma de entrega</strong>
+                    </div>
+                </div>
+                <div class="row mb-6 text-center">
+                    <div class="col-12">
+                        <label>
+                            <strong>____________________________</strong>
+                        </label>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+        <xpath expr="//div[@class='page']/h2" position="replace">
+            <h2>
+                <span t-field="o.picking_type_id"></span>
+                <span t-field="o.name" />
+            </h2>
+        </xpath>
+    </template>
+    <!--Accion de operaciones de albaran -->
+    <record model="ir.actions.report" id="stock.action_report_picking">
+        <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]" />
+    </record>
+    
+    
 </odoo>

@@ -1,58 +1,74 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="report_invoice_custom" inherit_id="account.report_invoice_document">   
-    <xpath expr="//p[@name='payment_communication']" position="replace" >
-    </xpath>
-     <xpath expr="//th[@name='th_taxes']/span" position="replace">
-    </xpath>
-       <xpath expr="//div[@class='row']" position="replace">
-    <table class="table table-sm o_main_table table-borderless">
-        <thead>
-            <tr>
-                <th><span>Cliente</span></th>
-                <th><span>Cédula</span></th>
-                <th><span>Dirección</span></th>
-                <th><span>Firma</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                   <strong><address class="mb-0 text-start" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/></strong> 
-                </td>
-                <td>
-                   <strong><address class="mb-0" t-field="o.partner_id.ci" t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}'/></strong>
-                </td>
-                <td>
-                    <strong><address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/></strong>
-                </td>
-                <td>
-                <div class="row mb-0 " >
-            <div class="col-12">
-              
-            </div>
-        </div>
-        <div class="mb-0 m-3 text-center">
-                <label><strong>______________________</strong></label> 
-        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</xpath>
-    <xpath expr="//div[@name='payment_term']" position="after">
-        <footer style="position: relative; bottom: -100px; ">
-        <div class="row mb-5 text-center">
-            <div class="col-12">
-                <label><strong>______________________</strong></label>
-            </div>
-        </div>
-        <div class="row mb-5 text-center" >
-            <div class="col-12">
-                <strong>Firma de entrega</strong>
-            </div>
-        </div>
-        </footer>
-    </xpath>
+    <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@name='payment_communication']" position="replace">
+        </xpath>
+        <xpath expr="//th[@name='th_taxes']/span" position="replace">
+        </xpath>
+        <xpath expr="//div[@class='row']" position="replace">
+            <table class="table table-sm o_main_table table-borderless">
+                <thead>
+                    <tr>
+                        <th>
+                            <span>Cliente</span>
+                        </th>
+                        <th>
+                            <span>Cédula</span>
+                        </th>
+                        <th>
+                            <span>Dirección</span>
+                        </th>
+                        <th>
+                            <span>Firma</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>
+                                <address class="mb-0 text-start" t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <address class="mb-0" t-field="o.partner_id.ci"
+                                    t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <address class="mb-0" t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                            </strong>
+                        </td>
+                        <td>
+                            <div class="mb-0 m-2 text-center">
+                                <label>
+                                    <strong>_____________________________</strong>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+        <xpath expr="//div[@name='payment_term']" position="after">
+            <footer style="position: relative; bottom: -100px; ">
+                <div class="row mb-5 text-center">
+                    <div class="col-12">
+                        <label>
+                            <strong>_____________________________</strong>
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-5 text-center">
+                    <div class="col-12">
+                        <strong>Firma de entrega</strong>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
     </template>
 </odoo>
