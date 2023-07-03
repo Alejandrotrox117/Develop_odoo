@@ -54,7 +54,7 @@ class ResPartner(models.Model):
             'wizard_id': psswd_wizard.id,
             'user_login': new_user.login,
             'user_id': new_user.id,
-            'new_passwd': '12345'
+            'new_passwd': 'Domestico.23'
         }
 
         self.env['change.password.user'].create(
