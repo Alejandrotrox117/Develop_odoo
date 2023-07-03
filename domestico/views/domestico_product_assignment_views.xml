@@ -12,10 +12,10 @@
                 </xpath>
 
                 <xpath expr="//page[@name='other_information']" position="attributes">
-                    <attribute name="groups">domestico.domestico_group_manager</attribute>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
 
-                <xpath expr="//header" position="replace">
+                <!-- <xpath expr="//header" position="replace">
                     <field name="partner_invoice_id" invisible="1" />
                     <field name="require_signature" invisible="1" />
                     <field name="invoice_status" invisible="1" />
@@ -30,7 +30,7 @@
                         <field name="state"  widget="statusbar" 
                                 statusbar_visible="draft,sale" on_change="1" modifiers="{'readonly': true}"/>
                     </header>
-                </xpath>
+                </xpath> -->
 
                 <xpath expr="//div[@name='button_box']" position="attributes">
                     <attribute name="invisible">1</attribute>
