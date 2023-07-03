@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="domestico_account_payment_search_inherit">
+          <field name="name">domestico.account.payment.search.inherit</field>
+          <field name="model">account.payment</field>
+          <field name="inherit_id" ref="account.view_account_payment_search"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="reference" />
+            </xpath>
+          </field>
+        </record>
+
+        <record model="ir.ui.view" id="domestico_account_payment_list_inherit">
+          <field name="name">domestico.account.payment.list.inherit</field>
+          <field name="model">account.payment</field>
+          <field name="inherit_id" ref="account.view_account_payment_tree"/>
+          <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="reference" optional="hide"/>
+            </xpath>
+            
+          </field>
+        </record>
+
+        <record model="ir.ui.view" id="domestico_account_payment_form_inherit">
+          <field name="name">domestico.account.payment.form.inherit</field>
+          <field name="model">account.payment</field>
+          <field name="inherit_id" ref="account.view_account_payment_form"/>
+          <field name="arch" type="xml">
+
+            <xpath expr="//group[@name='group2']" position="replace">
+                <group name="group2" string="Para">
+                  <field name="partner_bank_id" invisible="1"/>
+                  <field name="journal_id" domain="[('id', 'in', available_journal_ids)]" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                  <field name="payment_method_line_id" required="1" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//group[@name='group2']" position="inside">
+                  <xpath expr="//field[@name='ref']" position="move" />
+            </xpath>
+
+            <xpath expr="//group[@name='group1']" position="inside">
+                <field name="is_internacional_bank" invisible="1"/> 
+                <field name="reference" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <label for="file_ref" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                  <div name="reference_div" class="o_row" >
+                      <field name="filename" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                      <field name="file_ref" filename="filename" attrs="{'required': [('is_internacional_bank', '=', True)], 'readonly': [('state', '!=', 'draft')] }" />
+                  </div>
+                <xpath expr="//field[@name='date']" position="move" />
+            </xpath>
+
+            <xpath expr="//label[@for='amount']" position="before">
+                <field name="bank_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+            </xpath>
+
+            <xpath expr="//group[@name='group1']" position="attributes">
+                <attribute name="string">Desde</attribute>
+            </xpath>
+            
+            
+            <xpath expr="//field[@name='payment_method_line_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
+            <xpath expr="//field[@name='is_internal_transfer']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
+            <xpath expr="//field[@name='payment_type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="attrs"/>
+            </xpath>
+
+            <xpath expr="//field[@name='ref']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+
+          </field>
+        </record>
+
+    </data>
+</odoo>
