@@ -4,7 +4,7 @@
     'author': "My Company",
     'category': 'Uncategorized',
     'version': '0.1',
-    'depends': ['base', 'contacts', 'product', 'sale_management', 'hide_inbox_chatter', 'web_no_auto_save'],
+    'depends': ['base', 'contacts', 'product', 'sale', 'hide_inbox_chatter', 'web_no_auto_save'],
     'data': [
         'security/domestico_groups.xml',
         'security/ir.model.access.csv',

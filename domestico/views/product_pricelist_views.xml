@@ -11,11 +11,6 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
-            <xpath expr="//field[@name='currency_id']" position="replace">
-                <field name="warehouse_id" required="1"
-                    options="{'no_edit': True, 'no_create': True}"/>
-            </xpath>
-
             <xpath expr="//page[@name='pricelist_config']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
@@ -35,7 +30,7 @@
                     <field name="fixed_price" string="Price" invisible="1"/>
                     <field name="currency_id" invisible="1" />
                     <field name="pricelist_id" invisible="1"/>
-                    <!-- Pricelist ID is here only for related fields to be correctly computed -->
+
                     <field name="date_start" invisible="1"/>
                     <field name="date_end" invisible="1"/>
                     <field name="base" invisible="1"/>

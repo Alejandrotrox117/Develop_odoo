@@ -19,8 +19,6 @@ class ProductPricelist(models.Model):
 
     product_percent_id = fields.One2many('product.pricelist.percent', 'pricelist_id')
 
-    warehouse_id = fields.Many2one('stock.warehouse', string="Inventario de ciclo")
-
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist.item"
 
