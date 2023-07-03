@@ -11,5 +11,7 @@
         'views/product_template_view.xml',
         'views/product_product_view.xml',
         'views/domestico_stock_menus.xml',
+        
+        'reports/returns_report.xml'
     ]
 }

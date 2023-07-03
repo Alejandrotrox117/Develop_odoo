@@ -69,7 +69,7 @@
     </template>
     <!--Accion de operaciones de albaran -->
     <record model="ir.actions.report" id="stock.action_report_picking">
-        <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]" />
+        <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
     </record>
     
     

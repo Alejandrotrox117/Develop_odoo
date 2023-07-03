@@ -12,6 +12,8 @@
         'views/account_payment_view.xml',
         'views/domestico_account_menus.xml',
 
+        'reports/invoice_report.xml',
+        
         'wizard/account_payment_register_view.xml',
     ],
     'post_init_hook': 'create_update_bcv_job'
