@@ -6,3 +6,8 @@ class ResPartnerBanks(models.Model):
     partner_id = fields.Many2one('res.partner','Cliente')
     
     ci = fields.Char("Cédula",related="partner_id.ci")
+
+class ResBank(models.Model):
+    _inherit = "res.bank"
+
+    currency_id = fields.Many2one('res.currency', string="Moneda", required="1")

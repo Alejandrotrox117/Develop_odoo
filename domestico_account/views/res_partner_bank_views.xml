@@ -39,5 +39,19 @@
                 </xpath> 
             </field>
         </record>
+
+        <record id="domestico_view_partner_bank_list" model="ir.ui.view">
+            <field name="name">res.bank.list</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree string="Banks" editable="bottom">
+                        <field name="name"/>
+                        <field name="currency_id"/>
+                    </tree>
+                </xpath>
+            </field>
+        </record>
 </data>
 </odoo>
