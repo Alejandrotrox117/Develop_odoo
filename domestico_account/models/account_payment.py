@@ -2,14 +2,6 @@ from odoo import api, fields, models
 
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
-
-    payments = fields.Selection(string="Método de pago", 
-                                selection=[
-                                        ('transfer', 'Transferencia',),
-                                        ('p2p', 'Pago Movil'),
-                                        ('sale_point', 'Punto de Venta')
-                                    ]
-                                )
     
     bank_id = fields.Many2one('res.bank', string="Banco")
     is_internacional_bank = fields.Boolean(default=True, compute="_compute_is_internacional_bank")
