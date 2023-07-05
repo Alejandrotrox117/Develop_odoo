@@ -1,16 +1,30 @@
 <odoo>
+<!-- Contenedor donde se guardaba la cantidad entregada-->
+    <template id="stock_report_customs"
+        inherit_id="stock.stock_report_delivery_aggregated_move_lines">
+        <xpath expr="//td[@name='move_line_aggregated_qty_done']" position="replace">
+        </xpath>
+    </template>
+
     <!--Reporte de albaran en el inventario-->
     <template id="report_returns_custom" inherit_id="stock.report_delivery_document">
-        <xpath expr="//div[@name='outgoing_warehouse_address']" position="replace">
+        <xpath expr="//div[hasclass('row')]" position="replace">
         </xpath>
-        <xpath expr="//div[@class='row']" position="replace">
+        <xpath expr="//t[@t-set='address']" position="replace">
+        </xpath>
+        <xpath expr="//th[@name='th_sml_quantity']" position="replace">
+        </xpath>
+
+
+        <xpath expr="//table[@name='stock_move_table']" position="after">
             <table class="table  table-sm  o_main_table table-borderless">
                 <thead>
                     <tr>
                         <th scope="col">Cliente</th>
                         <th scope="col">Cédula</th>
                         <th scope="col">Dirección</th>
-                        <th scope="col">Firma</th>
+                        <th scope="col">Firma del Cliente</th>
+                        <th scope="col">Firma del Empleado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +48,14 @@
                             </strong>
                         </td>
                         <td class="bg-white">
-                            <div class="mb-2 m-2 text-dark">
+                            <div class="mb-4 m-2 text-dark text-center">
+                                <label>
+                                    <strong>____________________________</strong>
+                                </label>
+                            </div>
+                        </td>
+                        <td class="bg-white">
+                            <div class="mb-4 m-2 text-dark text-center">
                                 <label>
                                     <strong>____________________________</strong>
                                 </label>
@@ -43,22 +64,6 @@
                     </tr>
                 </tbody>
             </table>
-        </xpath>
-        <xpath expr="//table[@name='stock_move_line_table']" position="after">
-            <footer position="inside" style="position: absolute; bottom: -100px; left: 0; right: 0;">
-                <div class="row mb-6 text-center">
-                    <div class="col-12">
-                        <strong>Firma de entrega</strong>
-                    </div>
-                </div>
-                <div class="row mb-6 text-center">
-                    <div class="col-12">
-                        <label>
-                            <strong>____________________________</strong>
-                        </label>
-                    </div>
-                </div>
-            </footer>
         </xpath>
         <xpath expr="//div[@class='page']/h2" position="replace">
             <h2>
@@ -71,6 +76,4 @@
     <record model="ir.actions.report" id="stock.action_report_picking">
         <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
     </record>
-    
-    
 </odoo>
