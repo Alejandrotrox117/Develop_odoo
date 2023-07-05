@@ -15,6 +15,10 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="is_pricelist_active" widget="toggle_button"/>
+            </xpath>
+
             <xpath expr="//field[@name='item_ids']//tree[@groups='!product.group_sale_pricelist']" position="replace">
                 <tree groups="!product.group_sale_pricelist" string="Pricelist Rules" editable="bottom">
                     <field name="product_tmpl_id" string="Products" required="1" options="{'no_create':1}"/>

@@ -3,35 +3,65 @@
 
     <!-- Top menu item -->
 
-    <menuitem id="domestico_menu_root" name="Domestico"
+    <menuitem 
+        id="domestico_menu_root" 
+        name="Domestico"
         groups="domestico.domestico_group_user,domestico.domestico_group_manager">
         
-        <menuitem id="domestico_product_assignment_solic_menu_action" name="Solicitud de Electrodomestico"
-            action="domestico.domestico_product_assignment_solic_action" sequence="1"/>
+        <menuitem 
+            id="domestico_client_menu_root" 
+            name="Cientes"
+            sequence="1">
 
-        <menuitem id="domestico_product_assignment_menu_action" name="Asignación de Electrodomestico" 
-            action="domestico.domestico_product_assignment_action" sequence="2"/>
+            <menuitem 
+                id="domestico_product_assignment_solic_menu_action" 
+                name="Solicitudes"
+                sequence="1"
+                action="domestico.domestico_product_assignment_solic_action"/>
 
-        <menuitem id="domestico_product_pricelist_menu_action" name="Ciclos" 
-            action="domestico.domestico_product_pricelist_action" sequence="3"/>
+        </menuitem>
 
-        <menuitem id="domestico_config_menu_root" name="Configuración" sequence="4">
+        <menuitem 
+            id="domestico_product_assignment_menu_action" 
+            name="Asignación de Electrodomestico" 
+            sequence="2" 
+            action="domestico.domestico_product_assignment_action" 
+            groups="domestico.domestico_group_manager"/>
 
-            <menuitem id="domestico_client_type_menu_action" name="Tipo de cliente" 
-                action="domestico.domestico_client_type_action" sequence="1"/>
+        <menuitem 
+            id="domestico_product_pricelist_menu_action" 
+            name="Ciclos" 
+            sequence="3"
+            action="domestico.domestico_product_pricelist_action" 
+            groups="domestico.domestico_group_manager"/>
+
+        <menuitem 
+            id="domestico_config_menu_root" 
+            name="Configuración" 
+            sequence="4"
+            groups="domestico.domestico_group_manager">
+
+            <menuitem 
+                id="domestico_client_type_menu_action" 
+                name="Tipo de cliente" 
+                sequence="1"
+                action="domestico.domestico_client_type_action" />
 
         </menuitem>
 
     </menuitem>
+    
+    <record model="ir.ui.menu" id="contacts.menu_contacts" >
+        <field name="groups_id" eval="[(6,0,[ref('domestico.domestico_group_manager')])]"/>
+    </record>
 
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 2" id="domestico.menu_2" parent="domestico.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="Server to list" id="domestico" parent="domestico.menu_2"
-              action="domestico.action_server"/>
--->
+    <record model="ir.ui.menu" id="base.menu_board_root" >
+        <field name="groups_id" eval="[(6,0,[ref('domestico.domestico_group_manager')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="spreadsheet_dashboard.spreadsheet_dashboard_menu_root" >
+        <field name="groups_id" eval="[(6,0,[ref('domestico.domestico_group_manager')])]"/>
+    </record>
+
   </data>
 </odoo>

@@ -9,13 +9,18 @@
      <record id="domestico_group_user" model="res.groups">
         <field name="name">Usuario</field>
         <field name="category_id" ref="module_category_domestico"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
     </record>
 
      <record id="domestico_group_manager" model="res.groups">
         <field name="name">Administrador</field>
         <field name="category_id" ref="module_category_domestico"/>
-        <field name="implied_ids" eval="[(4, ref('domestico_group_user')), (4, ref('sales_team.group_sale_manager'))]"/>
+        <field name="implied_ids" 
+        eval="[
+            (4, ref('domestico_group_user')), 
+            (4, ref('sales_team.group_sale_manager')), 
+            (4, ref('product.group_product_pricelist'))
+        ]"/>
     </record>
 
     <record id="make_invisible" model="res.groups">

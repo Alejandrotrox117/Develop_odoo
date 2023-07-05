@@ -17,7 +17,15 @@ class ProductPricelistPercent(models.Model):
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 
+    is_pricelist_active = fields.Boolean('Ciclo Activo')
+
     product_percent_id = fields.One2many('product.pricelist.percent', 'pricelist_id')
+
+    @api.onchange('is_pricelist_active')
+    def _onchange_is_pricelist_active(self):
+        if self.is_pricelist_active:
+            for pricelist in self.search([('is_pricelist_active', '=', True)]):
+                pricelist.write({'is_pricelist_active': False})
 
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist.item"
