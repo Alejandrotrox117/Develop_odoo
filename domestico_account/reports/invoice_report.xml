@@ -3,9 +3,11 @@
     <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='payment_communication']" position="replace">
         </xpath>
+        <xpath expr="//div[hasclass('row')]" position="replace">
+        </xpath>
         <xpath expr="//th[@name='th_taxes']/span" position="replace">
         </xpath>
-        <xpath expr="//div[@class='row']" position="replace">
+        <xpath expr="//div[@id='total']" position="after">
             <table class="table table-sm o_main_table table-borderless">
                 <thead>
                     <tr>
@@ -20,6 +22,9 @@
                         </th>
                         <th>
                             <span>Firma</span>
+                        </th>
+                        <th>
+                            <span>Firma del empleado</span>
                         </th>
                     </tr>
                 </thead>
@@ -50,25 +55,16 @@
                                 </label>
                             </div>
                         </td>
+                        <td>
+                            <div class="mb-0 m-2 text-center">
+                                <label>
+                                    <strong>_____________________________</strong>
+                                </label>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-        </xpath>
-        <xpath expr="//div[@name='payment_term']" position="after">
-            <footer style="position: relative; bottom: -100px; ">
-                <div class="row mb-5 text-center">
-                    <div class="col-12">
-                        <label>
-                            <strong>_____________________________</strong>
-                        </label>
-                    </div>
-                </div>
-                <div class="row mb-5 text-center">
-                    <div class="col-12">
-                        <strong>Firma de entrega</strong>
-                    </div>
-                </div>
-            </footer>
         </xpath>
     </template>
 </odoo>
