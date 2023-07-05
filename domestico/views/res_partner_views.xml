@@ -13,6 +13,19 @@
       <field name="context">{'default_is_company': False}</field>
     </record>
 
+    <record model="ir.ui.view" id="domestico_res_partner_kanban_fields_inherit">
+      <field name="name">domestico.res.partner.kanban.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+
+      </field>
+    </record>
+
     <record model="ir.ui.view" id="domestico_res_partner_form_fields_inherit">
       <field name="name">domestico.res.partner.form.fields.inherit</field>
       <field name="model">res.partner</field>
@@ -21,6 +34,10 @@
 
         <xpath expr="//div[@name='button_box']" position="attributes">
           <attribute name="invisible">1</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="user_type" widget="radio" />
         </xpath>
 
         <xpath expr="//field[@name='company_type']" position="attributes">
@@ -67,10 +84,6 @@
         </xpath>
 
         <xpath expr="//field[@name='parent_id']" position="attributes">
-          <attribute name="attrs">{'readonly': [('type_partner','=', 'user')]}</attribute>
-        </xpath>
-
-        <xpath expr="//field[@name='parent_id']" position="attributes">
           <attribute name="attrs">{'invisible': [('parent_id', '=', False)]}</attribute>
           <attribute name="readonly">1</attribute>
         </xpath>
@@ -91,10 +104,6 @@
 
         <xpath expr="//div[hasclass('o_address_format')]" position="after">
           <field name="client_type_id" options="{'no_open': True, 'no_create': True, 'no_edit': True}" required="1" />
-        </xpath>
-
-        <xpath expr="//div[hasclass('o_address_format')]" position="inside">
-          <field name="gps" placeholder="GPS e.g. 000000,-12300410"/>
         </xpath>
 
         <xpath expr="//field[@name='child_ids']" position="attributes">
@@ -124,6 +133,7 @@
             <div name="partner_address_country" class="d-flex justify-content-between">
               <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}" />
             </div>
+            <field name="gps" placeholder="GPS e.g. 000000,-12300410"/>
           </div>
         </xpath>
 
@@ -137,7 +147,7 @@
       <field name="arch" type="xml">
 
         <xpath expr="//div[@role='alert']" position="before">
-          <header>
+          <header groups="domestico.domestico_group_manager">
             <field name="user_account" invisible="1"/>
             <button name="create_user_account" type="object" string="Crear cuenta de usuario" 
                     class="oe_highlight" attrs="{'invisible': [('user_account', '!=', False)]}"/>
@@ -168,7 +178,8 @@
                     <field name="city" placeholder="City" class="o_address_city"/>
                     <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
                     <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                    <field name="country_id" placeholder="Country" readonly="1" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="gps" placeholder="e.g: 41 24.2028, 2 10.4418" class="o_address_country" />
                   </div>
                 </group>
                 <group>

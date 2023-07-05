@@ -5,6 +5,21 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    _sql_constraints = [
+        ('ci_uniq', 'unique(ci)', 'El número de la cédula ya se ha registrado anteriormente'),
+        ('vat_uniq', 'unique(vat)', 'El número del RIF ya se ha registrado anteriormente'),
+        ('phone_uniq', 'unique(phone)', 'El número de télefono ya se ha registrado anteriormente'),
+        ('mobile_uniq', 'unique(mobile)', 'El número de télefono fijo ya se ha registrado anteriormente'),
+    ]
+
+    user_type = fields.Selection(string="Tipo de usuario", default="internal",
+                                 selection=[
+                                     ('internal', 'Interno'),
+                                     ('vendor', 'Proveedor'),
+                                     ('admin', 'Administrador'),
+                                 ]
+                                 )
+    
     client_type_id = fields.Many2one('client.type', string='Tipo de cliente')
 
     user_account = fields.Many2one('res.users')
@@ -15,6 +30,8 @@ class ResPartner(models.Model):
                         compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
     surnames = fields.Char('Apellidos', 
                            compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
+
+    country_id = fields.Many2one(default=lambda self: self._get_default_country_id())
 
     @api.depends('name')
     def _compute_format_names_surnames(self):
@@ -76,3 +93,15 @@ class ResPartner(models.Model):
     def _compute_display_name(self):
         for record in self:
             record.display_name = record.name if record.name else "Nuevo"
+
+    def _get_default_country_id(self):
+        return self.env['res.country'].search([('name', '=', 'Venezuela')])
+
+    def _get_name(self):
+        get_name = super(ResPartner, self)._get_name()
+
+        total_name = get_name.split('\n', 1)
+        
+        name = self.name + '\n' + total_name[1] if len(total_name) > 1 else self.name
+
+        return name
