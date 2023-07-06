@@ -1,13 +1,18 @@
 <odoo>
-<!-- Contenedor donde se guardaba la cantidad entregada-->
+    <!-- Contenedor donde se guardaba la cantidad entregada-->
     <template id="stock_report_customs"
         inherit_id="stock.stock_report_delivery_aggregated_move_lines">
         <xpath expr="//td[@name='move_line_aggregated_qty_ordered']" position="replace">
+        <td>
+            <span t-field="o.product_id.cubicaje" />
+            </td>
         </xpath>
+
     </template>
 
     <!--Reporte de albaran en el inventario-->
     <template id="report_returns_custom" inherit_id="stock.report_delivery_document">
+
         <xpath expr="//div[hasclass('row')]" position="replace">
         </xpath>
         <xpath expr="//t[@t-set='address']" position="replace">
@@ -15,6 +20,9 @@
         <xpath expr="//th[@name='th_sml_qty_ordered']" position="replace">
         </xpath>
 
+        <xpath expr="//th[@name='th_sml_product']" position="after">
+            <th scope="col">Cubicaje</th>
+        </xpath>
 
         <xpath expr="//table[@name='stock_move_table']" position="after">
             <table class="table  table-sm  o_main_table table-borderless">
@@ -61,6 +69,7 @@
                                 </label>
                             </div>
                         </td>
+
                     </tr>
                 </tbody>
             </table>
