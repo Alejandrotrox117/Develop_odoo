@@ -6,6 +6,7 @@
     'version': '0.1',
     'depends': ['account', 'domestico'],
     'data': [
+        'security/domestico_account_groups.xml',
         'security/ir.model.access.csv',
 
         'views/res_partner_bank_views.xml',        
