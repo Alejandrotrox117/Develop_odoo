@@ -23,3 +23,6 @@ class SaleOrder(models.Model):
                 continue
 
             order.warehouse_id = order.pricelist_id.warehouse_id.id
+
+    def action_quotation_send(self):
+        self.write({'state': 'sent'})

@@ -21,6 +21,7 @@
           <field name="invoice_status" invisible="1" />
           <field name="state" invisible="1"/>
           <field name="authorized_transaction_ids" invisible="1"/>
+
           <header groups="domestico.domestico_group_manager">
             <button name="payment_action_void" type="object" string="Void Transaction" data-hotkey="shift+v" confirm="Are you sure you want to void the authorized transaction? This action can't be undone." attrs="{'invisible': [('authorized_transaction_ids', '=', [])]}"/>
             <button id="create_invoice" name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice" type="action" class="btn-primary" data-hotkey="q" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
@@ -31,10 +32,19 @@
             <button name="action_draft" states="cancel" type="object" string="Set to Quotation" data-hotkey="w"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale"/>
           </header>
+
+          <header groups="!domestico.domestico_group_manager">
+            <button name="action_quotation_send" string="Enviar solicitud" type="object" states="draft" class="btn-primary" />
+            <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale"/>
+          </header>
         </xpath>
 
         <xpath expr="//div[@name='button_box']" position="attributes">
           <attribute name="invisible">1</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='order_line']" position="attributes">
+          <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
         </xpath>
 
         <xpath expr="//field[@name='order_line']//tree" position="replace">
