@@ -20,7 +20,7 @@ class ResPartner(models.Model):
                                  ]
                                  )
     
-    client_type_id = fields.Many2one('client.type', string='Tipo de cliente')
+    client_type_id = fields.Many2one('client.type', string='Rango de cliente')
 
     user_account = fields.Many2one('res.users')
     ci = fields.Char('Cédula')

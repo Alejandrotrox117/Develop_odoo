@@ -36,10 +36,6 @@
           <attribute name="invisible">1</attribute>
         </xpath>
 
-        <xpath expr="//field[@name='name']" position="after">
-            <field name="user_type" widget="radio" />
-        </xpath>
-
         <xpath expr="//field[@name='company_type']" position="attributes">
           <attribute name="invisible">1</attribute>
         </xpath>
@@ -104,6 +100,7 @@
 
         <xpath expr="//div[hasclass('o_address_format')]" position="after">
           <field name="client_type_id" options="{'no_open': True, 'no_create': True, 'no_edit': True}" required="1" />
+          <field name="user_type" widget="radio" options="{'horizontal':true}" />
         </xpath>
 
         <xpath expr="//field[@name='child_ids']" position="attributes">
