@@ -72,9 +72,9 @@
         </xpath>
 
         <xpath expr="//field[@name='description']" position="after">
-            <field name="cubicaje"></field>
+          <field name="cubicaje">
+          </field>
         </xpath>
-
       </field>
     </record>
   </data>

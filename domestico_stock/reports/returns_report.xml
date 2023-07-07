@@ -24,7 +24,7 @@
             <th scope="col">Cubicaje</th>
         </xpath>
 
-        <xpath expr="//table[@name='stock_move_table']" position="after">
+        <xpath expr="//table[@name='stock_move_table']" position="before">
             <table class="table  table-sm  o_main_table table-borderless">
                 <thead>
                     <tr>
