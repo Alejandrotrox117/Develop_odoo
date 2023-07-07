@@ -8,6 +8,10 @@
           <field name="arch" type="xml">
             <xpath expr="//search" position="inside">
                 <field name="reference" />
+                <filter name="payment_international" string="Pago internacional"
+                    domain="[('is_internacional_bank', '=', True)]" />
+                <filter name="payment_national" string="Pago Nacional"
+                    domain="[('is_internacional_bank', '=', False)]" />
             </xpath>
           </field>
         </record>
@@ -30,10 +34,26 @@
           <field name="inherit_id" ref="account.view_account_payment_form"/>
           <field name="arch" type="xml">
 
+            <xpath expr="//header" position="replace">
+              <field name="state" invisible="1"/>
+              <field name="amount_available_for_refund" invisible="1" readonly="1" />
+              <header groups="domestico.domestico_group_manager">
+                <button name="action_post" string="Confirm" type="object" class="oe_highlight" data-hotkey="v" modifiers="{&quot;invisible&quot;: [[&quot;state&quot;, &quot;!=&quot;, &quot;draft&quot;]]}"/>
+                <button name="action_draft" string="Reset To Draft" type="object" class="btn btn-secondary" data-hotkey="w" modifiers="{&quot;invisible&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;posted&quot;, &quot;cancel&quot;]]]}"/>
+                <button name="action_refund_wizard" type="object" string="Refund" class="btn-secondary" modifiers="{&quot;invisible&quot;: [[&quot;amount_available_for_refund&quot;, &quot;&lt;=&quot;, 0]]}"/>
+                <button name="action_cancel" string="Cancel" type="object" data-hotkey="z" modifiers="{&quot;invisible&quot;: [[&quot;state&quot;, &quot;!=&quot;, &quot;draft&quot;]]}"/>
+                <button name="mark_as_sent" string="Mark as Sent" type="object" data-hotkey="q" modifiers="{&quot;invisible&quot;: [&quot;|&quot;, &quot;|&quot;, [&quot;state&quot;, &quot;!=&quot;, &quot;posted&quot;], [&quot;is_move_sent&quot;, &quot;=&quot;, true], [&quot;payment_method_code&quot;, &quot;!=&quot;, &quot;manual&quot;]]}"/>
+                <button name="unmark_as_sent" string="Unmark as Sent" type="object" data-hotkey="k" modifiers="{&quot;invisible&quot;: [&quot;|&quot;, &quot;|&quot;, [&quot;state&quot;, &quot;!=&quot;, &quot;posted&quot;], [&quot;is_move_sent&quot;, &quot;=&quot;, false], [&quot;payment_method_code&quot;, &quot;!=&quot;, &quot;manual&quot;]]}"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,posted" on_change="1" modifiers="{&quot;readonly&quot;: true, &quot;required&quot;: true}"/>
+              </header>
+            </xpath>
+
             <xpath expr="//group[@name='group2']" position="replace">
                 <group name="group2" string="Para">
+                  <field name="currency_id" invisible="1" />
                   <field name="partner_bank_id" invisible="1"/>
-                  <field name="journal_id" string="" domain="[('id', 'in', available_journal_ids)]" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                  <field name="journal_id" string="Cuenta" 
+                        domain="[('id', 'in', available_journal_ids), ('currency_id', 'in', [currency_id])]" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                   <field name="payment_method_line_id" required="1" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                 </group>
             </xpath>
@@ -54,7 +74,7 @@
             </xpath>
 
             <xpath expr="//label[@for='amount']" position="before">
-                <field name="bank_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="bank_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
             </xpath>
 
             <xpath expr="//group[@name='group1']" position="attributes">
@@ -78,7 +98,40 @@
                 <attribute name="readonly">1</attribute>
             </xpath>
 
+            <xpath expr="//field[@name='partner_id']" position="replace">
+              <field name="partner_id" context="{'default_is_company': True}" string="Customer" 
+                  options="{'no_quick_create': True}" groups="domestico.domestico_group_manager"
+                  attrs="{'readonly':[('state', '!=', 'draft')],'invisible':['|', ('partner_type','!=','customer'), ('is_internal_transfer', '=', True)]}"/>
+              <field name="partner_id" context="{'default_is_company': True}" string="Customer" 
+                  options="{'no_quick_create': True}" groups="!domestico.domestico_group_manager"
+                  attrs="{'readonly': True, 'invisible':['|', ('partner_type','!=','customer'), ('is_internal_transfer', '=', True)]}"/>
+            </xpath>
+
           </field>
+        </record>
+
+
+        <!-- <record id="domestico_account_payment_register_action" model="ir.actions.act_window">
+          <field name="name">Pagos</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">account.payment</field>
+          <field name="view_mode">form</field>
+        </record> -->
+
+        <record id="domestico_account_payment_action" model="ir.actions.act_window">
+          <field name="name">Pagos nacionales</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">account.payment</field>
+          <field name="context">{'search_default_payment_national': True}</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="domestico_account_payment_international_action" model="ir.actions.act_window">
+          <field name="name">Pago Internacionales</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="context">{'search_default_payment_international': True}</field>
+          <field name="res_model">account.payment</field>
+          <field name="view_mode">tree,form</field>
         </record>
 
     </data>

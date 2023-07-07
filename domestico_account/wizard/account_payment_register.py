@@ -35,4 +35,6 @@ class AccountPaymentRegister(models.TransientModel):
                 usd_id = self.env['res.currency'].search([('name', '=', 'USD')])
 
                 record.is_internacional_bank = record.currency_id.id == usd_id.id
-    
+
+    @api.model
+    def default_get(self, fields_list): pass    

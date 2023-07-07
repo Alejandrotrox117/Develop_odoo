@@ -4,8 +4,10 @@ class AccountPayment(models.Model):
     _inherit = 'account.payment'
     
     bank_id = fields.Many2one('res.bank', string="Banco")
-    is_internacional_bank = fields.Boolean(default=True, compute="_compute_is_internacional_bank")
-    
+    is_internacional_bank = fields.Boolean(store=True, compute="_compute_is_internacional_bank")
+
+    partner_id = fields.Many2one(default=lambda self: self.env.user.partner_id, domain="[(1,'=',1)]")
+
     file_ref = fields.Binary()
     filename = fields.Char(string='Comprobante')
 
@@ -30,11 +32,10 @@ class AccountPayment(models.Model):
             else:
                 super(AccountPayment, self)._compute_currency_id()
                 
-    @api.depends('bank_id')
+    @api.depends('currency_id')
     def _compute_is_internacional_bank(self):
         for record in self:
             if record.bank_id:
-                usd_id = self.env['res.currency'].search([('name', '=', 'USD')])
+                usd_id = self.env['res.currency'].search([('name', '=', 'VES')])
 
-                record.is_internacional_bank = record.currency_id.id == usd_id.id
-
+                record.is_internacional_bank = record.currency_id.id != usd_id.id
