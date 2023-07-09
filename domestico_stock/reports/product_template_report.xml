@@ -1,5 +1,0 @@
-<odoo>
-    <template id="report_product_template_custom" inherit_id="stock.report_delivery_document">
-    
-    </template>
-</odoo>

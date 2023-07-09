@@ -73,8 +73,14 @@
 
         <xpath expr="//field[@name='description']" position="after">
           <field name="cubicaje">
+
+          </field>          
+        </xpath>
+        <xpath expr="//field[@name='default_code']" position="after">
+          <field name="customer_id" >
           </field>
         </xpath>
+
       </field>
     </record>
   </data>

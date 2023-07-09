@@ -27,12 +27,13 @@
                                 options="{'no_open': true}" on_change="1" can_create="true"
                                 can_write="true" />
                             <field name='default_code' on_change="1" />
+                            <field name='customer_id' />
                         </group>
                         <group>
                             <field name='description' />
                             <field name='cubicaje' />
                         </group>
-                        
+
                     </group>
                 </xpath>
 
