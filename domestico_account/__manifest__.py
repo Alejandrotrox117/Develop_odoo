@@ -17,7 +17,6 @@
         'views/domestico_account_menus.xml',
 
         'reports/invoice_report.xml',
-        
     ],
     'post_init_hook': 'create_update_bcv_job'
 }

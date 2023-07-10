@@ -3,73 +3,85 @@
     <record id="custom_stock_form_view" model="ir.ui.view">
       <field name="name">Custom Product Form</field>
       <field name="model">stock.picking</field>
-      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="inherit_id" ref="stock.view_picking_form" />
       <field name="arch" type="xml">
 
-         <xpath expr="//field[@name='product_id']" position="attributes">
-            <attribute name="options">{'no_create': 1}</attribute>
-          </xpath>
+        <xpath expr="//field[@name='product_id']" position="attributes">
+          <attribute name="options">{'no_create': 1}</attribute>
+        </xpath>
       </field>
     </record>
 
     <record id="custom_product_form_view" model="ir.ui.view">
       <field name="name">Custom Product Form</field>
       <field name="model">product.template</field>
-      <field name="inherit_id" ref="product.product_template_only_form_view"/>
+      <field name="inherit_id" ref="product.product_template_only_form_view" />
       <field name="arch" type="xml">
-       <xpath expr="//page[@name='invoicing']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-       <xpath expr="//div[@name='button_box']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-       <xpath expr="//page[@name='invoicing']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-              
+        <xpath expr="//page[@name='invoicing']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//div[@name='button_box']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//page[@name='invoicing']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+
         <xpath expr="//page[@name='purchase']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
         <xpath expr="//page[@name='inventory']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
-         <xpath expr="//field[@name='barcode']" position="attributes">
-                <attribute name="invisible">1</attribute>
-              </xpath>
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//field[@name='barcode']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-         <xpath expr="//div[@name='options']" position="after">
-              <group style="margin-right:10px;">
-                  <group>
-                      <field name="product_tag_ids" widget="many2many_tags" options="{'no_open': true}" on_change="1" can_create="true" can_write="true"/>
-                      <field name='default_code' on_change="1" />
-                  </group>
-                  <group>
-                      <field name='description' />
-                  </group>
-              </group>
-          </xpath>
+        <xpath expr="//div[@name='options']" position="after">
+          <group style="margin-right:10px;">
+            <group>
+              <field name="product_tag_ids" widget="many2many_tags" options="{'no_open': true}"
+                on_change="1" can_create="true" can_write="true" />
+              <field name='default_code' on_change="1" />
+            </group>
+            <group>
+              <field name='description' />
+            </group>
+          </group>
+        </xpath>
 
-         <xpath expr="//div[@name='options']" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath>
+        <xpath expr="//div[@name='options']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-         <xpath expr="//page[@name='general_information']" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath>
+        <xpath expr="//page[@name='general_information']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-         <xpath expr="//page[@name='sales']" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath>
+        <xpath expr="//page[@name='sales']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-         <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath>
+        <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
-          <xpath expr="//field[@name='taxes_id']" position="attributes">
-              <attribute name="context" />
-          </xpath>
-        </field>
+        <xpath expr="//field[@name='taxes_id']" position="attributes">
+          <attribute name="context" />
+        </xpath>
+
+        <xpath expr="//field[@name='description']" position="after">
+          <field name="cubicaje">
+
+          </field>          
+        </xpath>
+        <xpath expr="//field[@name='default_code']" position="after">
+          <field name="customer_id" >
+          </field>
+        </xpath>
+
+      </field>
     </record>
 
     <record id="stock.product_template_action_product" model="ir.actions.act_window">

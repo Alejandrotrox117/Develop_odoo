@@ -1,13 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
-        <xpath expr="//p[@name='payment_communication']" position="replace">
+    <template id="sale_order_report_custom" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//td[@name='td_taxes']"
+            position="replace">
         </xpath>
-        <xpath expr="//div[hasclass('row')]" position="replace">
+        <xpath expr="//th[@name='th_taxes']"
+            position="replace">
         </xpath>
-        <xpath expr="//th[@name='th_taxes']/span" position="replace">
+        <xpath expr="//t[@t-set='information_block']" position="replace">
         </xpath>
-        <xpath expr="//table[@name='invoice_line_table']" position="before">
+        <xpath
+            expr="//div[@t-field='doc.partner_id']" position="replace">
+        </xpath>
+        <xpath expr="//table[@class='table table-sm o_main_table table-borderless mt-4']"
+            position="before">
             <table class="table table-sm o_main_table table-borderless">
                 <thead>
                     <tr>
@@ -24,30 +29,26 @@
                             <span>Firma del Cliente</span>
                         </th>
                         <th>
-                            <span>Firma del empleado</span>
+                            <span>Firma del Empleado</span>
                         </th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <strong>
-                                <address class="mb-0 text-start" t-field="o.partner_id"
-                                    t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
-                            </strong>
+                            <div t-field="doc.partner_id"
+                                t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
                         </td>
                         <td>
-                            <strong>
-                                <address class="mb-0" t-field="o.partner_id.ci"
-                                    t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
-                            </strong>
+                            <address class="mb-0" t-field="doc.partner_id.ci"
+                                t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
                         </td>
                         <td>
-                            <strong>
-                                <address class="mb-0" t-field="o.partner_id"
-                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
-                            </strong>
+                            <address class="mb-0" t-field="doc.partner_id"
+                                t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
                         </td>
+
                         <td>
                             <div class="mb-0 m-2 text-center">
                                 <label>
@@ -55,6 +56,7 @@
                                 </label>
                             </div>
                         </td>
+
                         <td>
                             <div class="mb-0 m-2 text-center">
                                 <label>
@@ -62,6 +64,7 @@
                                 </label>
                             </div>
                         </td>
+
                     </tr>
                 </tbody>
             </table>

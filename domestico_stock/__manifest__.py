@@ -12,7 +12,7 @@
         'views/product_product_view.xml',
         'views/product_pricelist_views.xml',
         'views/domestico_stock_menus.xml',
-        
+        'views/domestico_proveedores.xml',
         'reports/returns_report.xml'
     ]
 }
