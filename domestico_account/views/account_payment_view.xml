@@ -111,13 +111,6 @@
         </record>
 
 
-        <!-- <record id="domestico_account_payment_register_action" model="ir.actions.act_window">
-          <field name="name">Pagos</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">account.payment</field>
-          <field name="view_mode">form</field>
-        </record> -->
-
         <record id="domestico_account_payment_action" model="ir.actions.act_window">
           <field name="name">Pagos nacionales</field>
           <field name="type">ir.actions.act_window</field>

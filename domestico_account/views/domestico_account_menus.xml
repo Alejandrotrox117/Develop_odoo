@@ -34,6 +34,13 @@
             action="account.action_account_payments"  
             parent="domestico.domestico_client_menu_root"/>
 
+        <menuitem 
+            id="domestico_payment_user_register_menu_action" 
+            name="Registrar Pago" 
+            sequence="5"
+            action="domestico_account.domestico_account_payment_user_register_action"  
+            parent="domestico.domestico_client_menu_root"/>
+
 
     <!-- Menus ocultos en facturacion-->
     <!-- Proveedores-->

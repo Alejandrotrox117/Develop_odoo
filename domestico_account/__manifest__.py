@@ -9,13 +9,15 @@
         'security/domestico_account_groups.xml',
         'security/ir.model.access.csv',
 
+        'wizard/account_payment_user_register_view.xml',
+        'wizard/account_payment_register_view.xml',
+
         'views/res_partner_bank_views.xml',        
         'views/account_payment_view.xml',
         'views/domestico_account_menus.xml',
 
         'reports/invoice_report.xml',
         
-        'wizard/account_payment_register_view.xml',
     ],
     'post_init_hook': 'create_update_bcv_job'
 }
