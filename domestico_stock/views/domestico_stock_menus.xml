@@ -17,5 +17,20 @@
             </menuitem>   
         </menuitem>   
 
+        <menuitem 
+            id="domestico_stock_vendor_menu_root"
+            sequence="2"
+            name="Proveedores"
+            groups="domestico.domestico_group_vendor"
+            parent="domestico.domestico_menu_root">
+
+            <menuitem 
+                id="domestico_suppliers_menu" 
+                sequence="3" 
+                name="Venta productos"
+                action="custom_graph_action" />
+
+        </menuitem>
+        
     </data>
 </odoo>

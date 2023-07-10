@@ -6,7 +6,7 @@
     'version': '0.1',
     'depends': ['account', 'domestico'],
     'data': [
-        'security/domestico_account_groups.xml',
+        'security/domestico_account_rules.xml',
         'security/ir.model.access.csv',
 
         'wizard/account_payment_user_register_view.xml',

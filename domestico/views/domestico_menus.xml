@@ -6,11 +6,12 @@
     <menuitem 
         id="domestico_menu_root" 
         name="Domestico"
-        groups="domestico.domestico_group_user,domestico.domestico_group_manager">
+        groups="domestico.domestico_group_user,domestico.domestico_group_vendor">
         
         <menuitem 
             id="domestico_client_menu_root" 
             name="Cientes"
+            groups="domestico.domestico_group_user,"
             sequence="1">
 
             <menuitem 
@@ -19,14 +20,14 @@
                 sequence="1"
                 action="domestico.domestico_product_assignment_solic_action"/>
 
-        </menuitem>
+            <menuitem 
+                id="domestico_product_assignment_menu_action" 
+                name="Asignación" 
+                sequence="2" 
+                action="domestico.domestico_product_assignment_action" 
+                groups="domestico.domestico_group_manager"/>
 
-        <menuitem 
-            id="domestico_product_assignment_menu_action" 
-            name="Asignación de Electrodomestico" 
-            sequence="2" 
-            action="domestico.domestico_product_assignment_action" 
-            groups="domestico.domestico_group_manager"/>
+        </menuitem>
 
         <menuitem 
             id="domestico_product_pricelist_menu_action" 

@@ -10,6 +10,8 @@
                     <group>
                         <group name="group1">
                             <field name="available_payment_method_line_ids" invisible="1"/>
+                            <field name="partner_id" options="{'no_open': True, 'no_create': True}" 
+                                groups="domestico.domestico_group_asesor"/>
                             <field name="company_id" invisible="1"/>
                             <field name="journal_id" options="{'no_open': True, 'no_create': True}" required="1"
                                     domain="[('type', '=', 'bank'), ('company_id', '=', company_id)]"/>

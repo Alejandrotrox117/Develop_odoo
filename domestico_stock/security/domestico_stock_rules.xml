@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+
+        <record id="domestico_stock_product_vendor_group_record_rule" model="ir.rule">
+            <field name="name">Proveedores: mis productos</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
+            <field name="domain_force">[('customer_id', '=', user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('domestico.domestico_group_vendor'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="domestico_stock_product_manager_group_record_rule" model="ir.rule">
+            <field name="name">Proveedores: todos los productos</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('domestico.domestico_group_manager'))]"/>
+        </record>
+
+   </data>
+</odoo>

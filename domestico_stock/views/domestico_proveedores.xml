@@ -23,9 +23,5 @@
             <field name="type">ir.actions.act_window</field>
         </record>
 
-        <menuitem id="domestico_suppliers_menu" name="Proveedores"
-            action="custom_graph_action" parent="domestico.domestico_menu_root"
-            sequence="3" />
-
     </data>
 </odoo>
