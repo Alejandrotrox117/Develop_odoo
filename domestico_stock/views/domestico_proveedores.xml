@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vista de gráfico -->
+        <record id="custom_graph_view" model="ir.ui.view">
+            <field name="name">Custom Graph View</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <graph string="Reporte de productos" type="bar">
+                    <field name="product_id" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- Acción de menú para la vista de gráfico -->
+
+
+        <record id="custom_graph_action" model="ir.actions.act_window">
+            <field name="name">Custom Graph</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="custom_graph_view" />
+            <field name="type">ir.actions.act_window</field>
+        </record>
+
+        <menuitem id="domestico_suppliers_menu" name="Proveedores"
+            action="custom_graph_action" parent="domestico.domestico_menu_root"
+            sequence="3" />
+
+    </data>
+</odoo>
