@@ -14,11 +14,21 @@
         <record model="ir.ui.menu" id="sale.sale_menu_root" >
             <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
         </record>
-
-        <!--Secuencia de menus -->
-<!-- <record model="ir.ui.menu" id="account.menu_contacts" >
+        <!--Menu item configuracion de tablero (dashboard) -->
+        <record model="ir.ui.menu" id="spreadsheet_dashboard.spreadsheet_dashboard_menu_configuration" >
             <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
-        </record> -->
-
+        </record>
+        
+        <!--Secuencia de menus -->
+        <record model="ir.ui.menu" id="contacts.menu_contacts" >
+            <field name="sequence" eval="1"/>
+        </record>
+         <record model="ir.ui.menu" id="stock.menu_stock_root" >
+            <field name="sequence" eval="2"/>
+        </record>
+        <record model="ir.ui.menu" id="account.menu_finance" >
+            <field name="sequence" eval="3"/>
+        </record>
+        
     </data>
 </odoo>

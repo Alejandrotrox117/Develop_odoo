@@ -5,7 +5,7 @@
 
     <menuitem 
         id="domestico_menu_root" 
-        name="Domestico"
+        name="Domestico" sequence="10"
         groups="domestico.domestico_group_user,domestico.domestico_group_vendor">
         
         <menuitem 
