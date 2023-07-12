@@ -14,6 +14,12 @@
         <record model="ir.ui.menu" id="sale.sale_menu_root" >
             <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
         </record>
+        <!--Menu item configuracion de tablero (dashboard) -->
+        <record model="ir.ui.menu" id="spreadsheet_dashboard.spreadsheet_dashboard_menu_configuration" >
+            <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
+        </record>
+
+        
 
         <!--Secuencia de menus -->
 <!-- <record model="ir.ui.menu" id="account.menu_contacts" >
