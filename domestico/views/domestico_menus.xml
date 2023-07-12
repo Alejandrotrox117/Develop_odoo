@@ -3,7 +3,7 @@
 
     <!-- Top menu item -->
 
-    <menuitem id="domestico_menu_root" name="Domestico"
+    <menuitem id="domestico_menu_root" name="Domestico" sequence="10"
         groups="domestico.domestico_group_user,domestico.domestico_group_manager">
         
         <menuitem id="domestico_product_assignment_solic_menu_action" name="Solicitud de Electrodomestico"

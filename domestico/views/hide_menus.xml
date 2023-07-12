@@ -23,6 +23,12 @@
         <record model="ir.ui.menu" id="contacts.menu_contacts" >
             <field name="sequence" eval="1"/>
         </record>
-
+         <record model="ir.ui.menu" id="stock.menu_stock_root" >
+            <field name="sequence" eval="2"/>
+        </record>
+        <record model="ir.ui.menu" id="account.menu_finance" >
+            <field name="sequence" eval="3"/>
+        </record>
+        
     </data>
 </odoo>
