@@ -105,3 +105,9 @@ class ResPartner(models.Model):
         name = self.name + '\n' + total_name[1] if len(total_name) > 1 else self.name
 
         return name
+    
+    @api.model
+    def _commercial_fields(self):
+        comercial_fields = super(ResPartner, self)._commercial_fields()
+        comercial_fields.remove("vat")
+        return comercial_fields
