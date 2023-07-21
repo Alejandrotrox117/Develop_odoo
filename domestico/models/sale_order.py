@@ -5,8 +5,6 @@ class SaleOrder(models.Model):
 
     partner_id = fields.Many2one(default=lambda self: self.env.user.partner_id)
 
-    # warehouse_id = fields.Many2one(related="pricelist_id.warehouse_id")
-
     def _compute_pricelist_id(self):
         super(SaleOrder, self)._compute_pricelist_id()
         for order in self:
