@@ -7,13 +7,12 @@
         </xpath>
         <xpath expr="//div[hasclass('row')]" position="replace">
             <div class="row row-cols-1">
-                <strong style="margin-left:30px" class="p-2 ">Datos del cliente</strong>
+                <strong >Datos del cliente</strong>
                 <div class="col">
                     <div class="row">
                         <div class="col-9">
                             <div class="col-4">
                                 <strong class="col-6">Nombre y Apellido: </strong>
-
                                 <label class="mb-0 text-end " t-field="o.partner_id"
                                     t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
                             </div>
@@ -24,7 +23,7 @@
                     <div class="row">
                         <div class="col-9">
                             <div class="col-4">
-                                <strong class="col-6">Cédula de identidad:</strong>
+                                <strong >Cédula de identidad:</strong>
                                 <label t-field="o.partner_id.ci"
                                     t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
                             </div>
