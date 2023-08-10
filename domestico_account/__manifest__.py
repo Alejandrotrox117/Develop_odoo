@@ -13,6 +13,7 @@
         'wizard/account_payment_register_view.xml',
 
         'views/res_partner_bank_views.xml',        
+        'views/res_partner_views.xml',        
         'views/account_payment_view.xml',
         'views/account_move_view.xml',
         'views/domestico_account_menus.xml',
