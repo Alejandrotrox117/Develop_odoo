@@ -52,6 +52,14 @@
 
     </menuitem>
     
+    <menuitem
+        id="res_users_groups_menu"
+        name="Módulos usuarios"
+        action="res_users_groups_action"
+        groups="base.group_system"
+        parent="base.menu_users"
+        sequence="10"/>
+
     <record model="ir.ui.menu" id="contacts.menu_contacts" >
         <field name="groups_id" eval="[(6,0,[ref('domestico.domestico_group_manager')])]"/>
     </record>

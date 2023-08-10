@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="profile_user_view_form" model="ir.ui.view">
+        <field name="name">profile.user.view.form</field>
+        <field name="model">profile.user</field>
+        <field name="arch" type="xml">
+            <form string="Perfil de usuario">
+                <sheet>
+                    <group>
+                        <field name="user_type" widget="radio" options="{'horizontal': True}"/>
+                    </group>
+                    <group string="Accesso Módulos" attrs="{'invisible': [('user_type', '!=', 'internal')]}">
+                        <field name="groups_id" widget="many2many_checkboxes" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Confirmar" name="action_user_account" type="object" class="oe_highlight" data-hotkey="q"/>
+                    <button string="Cancelar" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
