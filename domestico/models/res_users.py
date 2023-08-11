@@ -1,15 +1,21 @@
 from odoo import models, fields
 
+
 class ResUsers(models.Model):
     _inherit = "res.users"
 
+    @property
+    def get_user_type(self):
+        return [
+            ('user', 'Cliente'),
+            ('vendor', 'Proveedor'),
+            ('internal', 'Interno'),
+            ('manager', 'Administrador'),
+        ]
+
     user_type = fields.Selection(string="Tipo de usuario", default="user",
-                                 selection=[
-                                     ('user', 'Cliente'),
-                                     ('vendor', 'Proveedor'),
-                                     ('internal', 'Interno'),
-                                     ('admin', 'Administrador'),
-                                 ])
+                                selection=lambda self: self.get_user_type)
+
 
 class ResUsersGroups(models.Model):
     _name = "res.users.groups"

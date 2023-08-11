@@ -12,12 +12,7 @@ class ProfileUser(models.TransientModel):
                             default=lambda self: self._get_users_groups())
 
     user_type = fields.Selection(string="Tipo de usuario", required=True,
-                                selection=[
-                                    ('user', 'Cliente'),
-                                    ('vendor', 'Proveedor'),
-                                    ('internal', 'Interno'),
-                                    ('admin', 'Administrador'),
-                                ])
+                                selection=lambda self: self.env["res.users"].get_user_type)
 
     def _get_user_id(self):
         return self.env['res.partner'].browse(self._context.get("default_partner_id")).user_account
