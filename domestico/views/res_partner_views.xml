@@ -134,6 +134,9 @@
                   class="oe_highlight oe_edit_only" attrs="{'invisible': [('user_account', '!=', False)]}"/>
             <button name="form_user_account" type="object" string="Modificar usuario" 
                   class="oe_highlight oe_edit_only" attrs="{'invisible': [('user_account', '=', False)]}"/>
+                  
+            <button name="form_user_password" type="object" string="Cambiar contraseña" 
+                  class="oe_highlight oe_edit_only" attrs="{'invisible': [('user_account', '=', False)]}"/>
           </header>
         </xpath>
 
