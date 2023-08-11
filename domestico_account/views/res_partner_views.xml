@@ -14,8 +14,7 @@
         </xpath>
 
         <xpath expr="//field[@name='allow_out_payment']" position="replace">
-          <field name="payment_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"
-                domain="[('bank_id', '=', bank_id), ('payment_type', '=', 'inbound')]"/>
+          <field name="payment_ids" widget="many2many_tags" />
         </xpath>
 
         <xpath expr="//page[@name='accounting_disabled']" position="replace"/>
