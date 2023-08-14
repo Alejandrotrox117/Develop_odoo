@@ -56,9 +56,25 @@ class AccountPayment(models.Model):
         is_valid = self.create_uid.id != self.env.user.id
 
         return is_valid
+
+    @api.constrains('partner_id')
+    def _constrain_partner_id(self):
+        for record in self:
+            have_account = self.env['account.move']\
+                                .search([('partner_id', '=', record.partner_id.id), ('state', '!=', 'cancel'), ('payment_state', '!=', 'paid')])\
+                                .exists()
+            if not have_account:
+                raise ValidationError('El cliente no tiene facturas registradas.')
     #CRUD Functions
     @api.model
     def create(self, vals_list):
+        if self.env.context.get('import_file'):
+            payments = self.env['account.payment.method.line']
+            payment_name = payments.browse(vals_list['payment_method_line_id']).name
+            payment_method = payments.search([('name', '=', payment_name), ('journal_id', '=', vals_list['journal_id']), ('payment_type', '=', 'inbound')])
+            vals_list['payment_method_line_id'] = payment_method.id
+            return super(AccountPayment, self).create(vals_list)
+
         payment = self.search(
             [
                 ('state', '=', 'draft'),
@@ -72,9 +88,7 @@ class AccountPayment(models.Model):
         )
 
         if payment and payment._valid_user_match():
-           
-           payment.action_post()
-           
-           return payment 
-        
-        return super(AccountPayment, self).create(vals_list)
+            payment.action_post()
+            return payment 
+        else:
+            raise ValidationError('El pago no ha sido registrado previamente por el personal autorizado por lo que no se puede validad.')

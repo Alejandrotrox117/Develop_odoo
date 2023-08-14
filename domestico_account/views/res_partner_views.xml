@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="domestico_account_res_partner_form_inherit">
+      <field name="name">domestico.account.res.partner.form.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+
+        <xpath expr="//page[@name='accounting']" position="attributes">
+          <attribute name="string">Referencias Bancarias</attribute>
+          <attribute name="attrs"/>
+          <attribute name="groups"/>
+        </xpath>
+
+        <xpath expr="//field[@name='allow_out_payment']" position="replace">
+          <field name="payment_ids" widget="many2many_tags" />
+        </xpath>
+
+        <xpath expr="//page[@name='accounting_disabled']" position="replace"/>
+
+      </field>
+    </record>
+
+  </data>
+</odoo>

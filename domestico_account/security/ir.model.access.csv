@@ -2,5 +2,6 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_domestico_account_move_user,domestico.account.move.user,account.model_account_move,domestico.domestico_group_user,1,0,0,0
 access_domestico_account_account_user,domestico.account.account.user,account.model_account_account,domestico.domestico_group_user,1,0,1,0
 access_domestico_account_payment_user,domestico.account.payment.user,account.model_account_payment,domestico.domestico_group_user,1,0,1,0
+access_domestico_res_bank_payment_user,domestico.res.bank.payment.user,domestico_account.model_res_bank_payment,domestico.domestico_group_manager,1,1,1,1
 
 access_account_payment_user_register,access.account.payment.user.register,model_account_payment_user_register,domestico.domestico_group_user,1,1,1,0

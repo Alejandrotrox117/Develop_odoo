@@ -15,9 +15,6 @@ class SaleOrderLine(models.Model):
 
     def _compute_price_unit(self):
         for record in self:
-            percents = record.pricelist_id.product_percent_id.filtered(lambda percent: percent.secuence <= record.client_percent_id.secuence)
-            total_percent = sum(percents.mapped("percent")) / 100
-            dif = record.pricelist_item_id.price_offert - record.pricelist_item_id.price_private
-            price = record.pricelist_item_id.price_offert - (dif * total_percent)
-
-            record.price_unit = price
+            price = record.pricelist_item_id._get_price_percent(record.client_percent_id)
+            if price:
+                record.price_unit = price

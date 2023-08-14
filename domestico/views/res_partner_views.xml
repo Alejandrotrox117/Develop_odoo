@@ -1,5 +1,6 @@
 <odoo>
   <data>
+
     <record model="ir.ui.menu" id="contacts.menu_contacts">
       <field name="name">Directorio</field>
     </record>
@@ -19,15 +20,15 @@
       <field name="inherit_id" ref="base.res_partner_kanban_view"/>
       <field name="arch" type="xml">
 
-          <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="attributes">
-            <attribute name="invisible">1</attribute>
-          </xpath>
+        <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
 
       </field>
     </record>
 
-    <record model="ir.ui.view" id="domestico_res_partner_form_fields_inherit">
-      <field name="name">domestico.res.partner.form.fields.inherit</field>
+    <record model="ir.ui.view" id="domestico_res_partner_form_inherit">
+      <field name="name">domestico.res.partner.form.inherit</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field name="arch" type="xml">
@@ -60,14 +61,6 @@
           <attribute name="invisible">1</attribute>
         </xpath>
 
-        <xpath expr="//page[@name='accounting']" position="attributes">
-          <attribute name="invisible">1</attribute>
-        </xpath>
-
-        <xpath expr="//page[@name='accounting_disabled']" position="attributes">
-          <attribute name="invisible">1</attribute>
-        </xpath>
-
         <xpath expr="//span[@name='address_name']" position="replace">
           <span class="o_form_label o_td_label" name="address_name">
             <field name="type" invisible="1"/>
@@ -88,6 +81,10 @@
           <label for="parent_id" string="Referido por" attrs="{'invisible': [('parent_id', '=', False)]}"/>
         </xpath>
 
+        <xpath expr="//span[@name='address_name']" position="before">
+          <field name="birthday" />
+        </xpath>
+
         <xpath expr="//field[@name='function']" position="before">
           <field name="ci" attrs="{'invisible': [('is_company','=', True)]}" />
           <xpath expr="//field[@name='vat']" position="move" />
@@ -96,11 +93,6 @@
         <xpath expr="//field[@name='vat']" position="attributes">
           <attribute name="string">RIF</attribute>
           <attribute name="attrs"/>
-        </xpath>
-
-        <xpath expr="//div[hasclass('o_address_format')]" position="after">
-          <field name="client_type_id" options="{'no_open': True, 'no_create': True, 'no_edit': True}" required="1" />
-          <field name="user_type" widget="radio" options="{'horizontal':true}" />
         </xpath>
 
         <xpath expr="//field[@name='child_ids']" position="attributes">
@@ -134,22 +126,17 @@
           </div>
         </xpath>
 
-      </field>
-    </record>
-
-    <record model="ir.ui.view" id="domestico_res_partner_form_inherit">
-      <field name="name">domestico.res.partner.form.inherit</field>
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="domestico.domestico_res_partner_form_fields_inherit"/>
-      <field name="arch" type="xml">
-
         <xpath expr="//div[@role='alert']" position="before">
           <header groups="domestico.domestico_group_manager">
             <field name="user_account" invisible="1"/>
-            <button name="create_user_account" type="object" string="Crear cuenta de usuario" 
-                    class="oe_highlight" attrs="{'invisible': [('user_account', '!=', False)]}"/>
-            <button name="view_user_account" type="object" string="Ver cuenta del usuario" 
-                    class="oe_highlight" attrs="{'invisible': [('user_account', '=', False)]}"/>
+
+            <button name="form_user_account" type="object" string="Crear usuario" 
+                  class="oe_highlight oe_edit_only" attrs="{'invisible': [('user_account', '!=', False)]}"/>
+            <button name="form_user_account" type="object" string="Modificar usuario" 
+                  class="oe_highlight oe_edit_only" attrs="{'invisible': [('user_account', '=', False)]}"/>
+                  
+            <button name="form_user_password" type="object" string="Cambiar contraseña" 
+                  class="oe_highlight oe_edit_only" attrs="{'invisible': [('user_account', '=', False)]}"/>
           </header>
         </xpath>
 
@@ -158,41 +145,9 @@
             Referidos: <field name="child_ids" widget="many2many_tags" />
           </div>
         </xpath>
-        
-        <xpath expr="//page[@name='contact_addresses']//form" position="replace">
-          <form string="Referido">
-            <field name="parent_id" invisible="1"/>
-            <sheet>
-              <group>
-                <group>
-                  <field name="name" />
-                  <span class="o_form_label o_td_label" name="address_name">
-                      <b>Dirección</b>
-                  </span>
-                  <div class="o_address_format" name="div_address">
-                    <field name="street" placeholder="Street..." class="o_address_street"/>
-                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                    <field name="city" placeholder="City" class="o_address_city"/>
-                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
-                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                    <field name="country_id" placeholder="Country" readonly="1" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
-                    <field name="gps" placeholder="e.g: 41 24.2028, 2 10.4418" class="o_address_country" />
-                  </div>
-                </group>
-                <group>
-                  <field name="ci" />
-                  <field name="vat" string="RIF" />
-                  <field name="email" widget="email"/>
-                  <field name="phone" widget="phone"/>
-                  <field name="mobile" widget="phone"/>
-                  <field name="company_id" invisible="1"/>
-                </group>
-              </group>
-              <field name="lang" invisible="1"/>
-              <field name="user_id" invisible="1"/>
-            </sheet>
-          </form>
-        </xpath>
+
+
+        <xpath expr="//page[@name='contact_addresses']//form" position="replace" />
 
       </field>
     </record>
