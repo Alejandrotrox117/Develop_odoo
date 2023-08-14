@@ -15,6 +15,7 @@
         'views/product_pricelist_views.xml',
         'views/domestico_menus.xml',
         'views/hide_menus.xml',
+        'reports/reports_templates.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [
