@@ -3,8 +3,10 @@
     <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='payment_communication']" position="replace">
         </xpath>
+       
         <xpath expr="//tr/th[@name='th_taxes']/span" position="replace">
         </xpath>
+
         <xpath expr="//div[hasclass('row')]" position="replace">
             <div style="margin-bottom:-40px;margin-top:0px">
                 <h4 class="" style="margin-left:28px">Datos del cliente</h4>
@@ -25,7 +27,7 @@
                 <div class="col">
                     <strong class="col-6">RIF:</strong>
                     <span t-field="o.partner_id.vat"
-                        t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
+                        t-options='{"fields": ["o.partner_id.vat"], "no_marker": True}' />
                 </div>
                 <div class="col">
                     <strong class="col-6">Contacto:</strong>
@@ -39,16 +41,12 @@
                 </div>
                 <div t-if="o.state" class="col" name="div_sched_date">
                     <strong>Fecha:</strong>
-                   
-                        <p t-field="o.create_date" />
-                 
-                </div> 
+                    <p t-field="o.create_date" />
+                </div>
             </div>
         </xpath>
-
-
         <xpath expr="//div[hasclass('page')]" position="after">
-            <t t-call="domestico.template_sign"/>
+            <t t-call="domestico.template_sign" />
         </xpath>
     </template>
 </odoo>
