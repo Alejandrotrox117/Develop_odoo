@@ -15,6 +15,36 @@
               <attribute name="readonly">1</attribute>
             </xpath>
 
+            <xpath expr="//field[@name='payment_reference']" position="attributes">
+              <attribute name="invisible">1</attribute>
+            </xpath>
+
+          </field>
+        </record>
+        
+        <record id="domestico_account_move_list_inherit_account_move" model="ir.ui.view">
+          <field name="name">account.move.view.list.inherit</field>
+          <field name="model">account.move</field>
+          <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+          <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='amount_total_signed']" position="after">
+                <field name="amount_weekly" sum="Total" />
+            </xpath>
+
+          </field>
+        </record>
+
+        <record id="domestico_account_move_search_inherit_account_move" model="ir.ui.view">
+          <field name="name">account.move.view.search.inherit</field>
+          <field name="model">account.move</field>
+          <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+          <field name="arch" type="xml">
+            
+            <xpath expr="//group//filter[@name='salesperson']" position="after">
+                <filter name="partner_id" string="Cliente"  context="{'group_by': 'partner_id'}" />
+            </xpath>
+
           </field>
         </record>
 
