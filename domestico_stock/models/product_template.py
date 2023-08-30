@@ -14,5 +14,5 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
     cubicaje=fields.Float(string="Cubicaje (mts)")
     customer_id = fields.Many2one('res.partner',related="product_tmpl_id.customer_id" ,string="Proveedor")
-   
+    
     

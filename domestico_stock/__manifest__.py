@@ -14,7 +14,6 @@
         'views/product_pricelist_views.xml',
         'views/domestico_proveedores.xml',
         'views/domestico_stock_menus.xml',
-        'views/product_stock_tree.xml',
         
         
         'reports/returns_report.xml'

@@ -1,56 +1,68 @@
 <odoo>
     <data>
 
-                <!--Menus de pagos en facturacion -->
+        <!--Menus de pagos en facturacion -->
         <menuitem id="account.menu_finance" name="Facturación" sequence="10">
-           
-            <menuitem id="menu_sub_1" name="Pagos">
-                
-                <menuitem id="account.menu_sub_1" name="Pagos" 
-                        action="domestico_account.domestico_account_payment_action"  sequence="1"/>
-                <menuitem id="account.menu_sub_2" name="Pagos Internacionales"  
-                        action="domestico_account.domestico_account_payment_international_action" />
+
+            <menuitem id="menu_sub_1" name="Pagos" sequence="2">
+
+                <menuitem id="account.menu_sub_1" name="Pagos"
+                    action="domestico_account.domestico_account_payment_action" sequence="1" />
+                <menuitem id="account.menu_sub_2" name="Pagos Internacionales"
+                    action="domestico_account.domestico_account_payment_international_action" />
 
                 <menuitem id="domestico_bank_menu_separetor" name="Bancos">
                     <menuitem id="domestico_bank_menu_action" name="Bancos"
-                            action="base.action_res_bank_form"/>
+                        action="base.action_res_bank_form" />
                 </menuitem>
 
-            </menuitem>        
-            
+            </menuitem>
+
+            <!--Menu nuevo en facturacion que contiene el acceso directo a las facturas -->
+
+            <menuitem id="menu_inicio_1" name="Inicio" sequence="1">
+
+                <menuitem id="account.menu_inicio_1" name="Facturas"
+                    action="account.action_move_out_invoice_type" sequence="1" />
+                <menuitem id="account.menu_inicio_2" name="Facturas Rectificativas"
+                    action="account.action_move_out_refund_type" />
+            </menuitem>
+
+
         </menuitem>
-    
-        <menuitem 
-            id="domestico_account_move_menu_action" 
-            name="Facturas"  
+
+        <menuitem
+            id="domestico_account_move_menu_action"
+            name="Facturas"
             sequence="3"
-            action="account.action_move_out_invoice_type" 
-            parent="domestico.domestico_client_menu_root"/>
+            action="account.action_move_out_invoice_type"
+            parent="domestico.domestico_client_menu_root" />
 
-        <menuitem 
-            id="domestico_payment_menu_action" 
-            name="Pagos" 
+        <menuitem
+            id="domestico_payment_menu_action"
+            name="Pagos"
             sequence="4"
-            action="account.action_account_payments"  
-            parent="domestico.domestico_client_menu_root"/>
+            action="account.action_account_payments"
+            parent="domestico.domestico_client_menu_root" />
 
-        <menuitem 
-            id="domestico_payment_user_register_menu_action" 
-            name="Registrar Pago" 
+        <menuitem
+            id="domestico_payment_user_register_menu_action"
+            name="Registrar Pago"
             sequence="5"
-            action="domestico_account.domestico_account_payment_user_register_action"  
-            parent="domestico.domestico_client_menu_root"/>
-
-
-    <!-- Menus ocultos en facturacion-->
-    <!-- Proveedores-->
+            action="domestico_account.domestico_account_payment_user_register_action"
+            parent="domestico.domestico_client_menu_root" />
+        <!-- Menus ocultos en facturacion-->
+        <!-- Proveedores-->
         <record model="ir.ui.menu" id="account.menu_finance_payables">
-            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
         </record>
         <!--Pagos en clientes -->
         <record model="ir.ui.menu" id="account.menu_action_account_payments_receivable">
-            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
         </record>
-
+        <!--Boton de clientes -->
+        <record model="ir.ui.menu" id="account.menu_finance_receivables">
+            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
+        </record>
     </data>
 </odoo>
