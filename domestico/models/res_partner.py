@@ -18,14 +18,14 @@ class ResPartner(models.Model):
     ci = fields.Char('Cédula')
     gps = fields.Char('Dirección GPS')
 
-    names = fields.Char('Nombres', 
-                        compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
-    surnames = fields.Char('Apellidos', 
-                           compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
+    names = fields.Char('Nombres', compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
+    surnames = fields.Char('Apellidos', compute='_compute_format_names_surnames', inverse='_inverse_names_surnames_to_name')
 
     country_id = fields.Many2one(default=lambda self: self._get_default_country_id())
 
     birthday = fields.Date(string='Fecha de nacimiento')
+    
+    pricelist_percent_ids = fields.One2many('res.partner.product.pricelist.percent', 'partner_id', string="Rangos")
     
     @api.depends('name')
     def _compute_format_names_surnames(self):

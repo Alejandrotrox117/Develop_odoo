@@ -14,6 +14,18 @@ class ProductPricelistPercent(models.Model):
 
     pricelist_id = fields.Many2one('product.pricelist')
 
+    partner_ids = fields.One2many('res.partner.product.pricelist.percent', 'pricelist_percent_id', string="Clientes")
+    
+class PartnerProductPricelistPercent(models.Model):
+    _name = "res.partner.product.pricelist.percent"
+    _description = "Res partner percent product pricelist"
+
+    partner_id = fields.Many2one('res.partner', string="Usuarios")
+    
+    pricelist_percent_id = fields.Many2one('product.pricelist.percent', string="Rango")
+    client_type_id = fields.Many2one('client.type',string="Rango", related='pricelist_percent_id.client_type_id', store=True)
+    pricelist_id = fields.Many2one('product.pricelist', string="Ciclo", related='pricelist_percent_id.pricelist_id')
+
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 

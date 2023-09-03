@@ -1,10 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_domestico_client_type_manager,domestico.client.type.manager,model_client_type,domestico.domestico_group_manager,1,1,1,1
 access_domestico_product_pricelist_percent_manager,domestico.product.pricelist.percent.manager,model_product_pricelist_percent,domestico.domestico_group_manager,1,1,1,1
+access_domestico_res_partner_product_pricelist_percent_manager,domestico.res.partner.product.pricelist.percent.manager,model_res_partner_product_pricelist_percent,domestico.domestico_group_manager,1,1,1,1
 access_domestico_res_partner_user,domestico.res.partner.user,model_res_partner,domestico.domestico_group_user,1,1,1,1
 access_domestico_res_partner_manager,domestico.res.partner.manager,model_res_partner,domestico.domestico_group_manager,1,1,1,1
 access_domestico_sale_order_user,domestico.sale.order.user,sale.model_sale_order,domestico.domestico_group_user,1,1,1,1
 access_domestico_sale_order_manager,domestico.sale.order.manager,sale.model_sale_order,domestico.domestico_group_manager,1,1,1,1
 access_domestico_profile_user_manager,domestico.profile.user.manager,domestico.model_profile_user,domestico.domestico_group_manager,1,1,1,1
 access_domestico_res_user_groups,domestico.res.user.groups,domestico.model_res_users_groups,base.group_system,1,1,1,1
-
