@@ -3,100 +3,50 @@
     <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
         <xpath expr="//p[@name='payment_communication']" position="replace">
         </xpath>
+       
         <xpath expr="//tr/th[@name='th_taxes']/span" position="replace">
         </xpath>
-        <xpath expr="//div[hasclass('row')]" position="replace">
-            <div class="row row-cols-1">
-                <strong style="margin-left:30px" class="p-2 ">Datos del cliente</strong>
-                <div class="col">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="col-4">
-                                <strong class="col-6">Nombre y Apellido: </strong>
 
-                                <label class="mb-0 text-end " t-field="o.partner_id"
-                                    t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
-                            </div>
-                        </div>
+        <xpath expr="//div[hasclass('row')]" position="replace">
+            <div style="margin-bottom:-40px;margin-top:0px">
+                <h4 class="" style="margin-left:28px">Datos del cliente</h4>
+                <div class="row row-cols-1">
+                    <div class="col-2">
+                        <strong class="">Nombre y Apellido:</strong>
+                    </div>
+                    <div class="col-3">
+                        <span class="text-left" t-field="o.partner_id"
+                            t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
                     </div>
                 </div>
                 <div class="col">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="col-4">
-                                <strong class="col-6">Cédula de identidad:</strong>
-                                <label t-field="o.partner_id.ci"
-                                    t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
-                            </div>
-                        </div>
-                    </div>
+                    <strong class="col-6">Cédula de identidad:</strong>
+                    <span t-field="o.partner_id.ci"
+                        t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
                 </div>
                 <div class="col">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="col-4">
-                                <strong class="col-6">RIF:</strong>
-                                <label t-field="o.partner_id.vat"
-                                    t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
-                            </div>
-                        </div>
-                    </div>
+                    <strong class="col-6">RIF:</strong>
+                    <span t-field="o.partner_id.vat"
+                        t-options='{"fields": ["o.partner_id.vat"], "no_marker": True}' />
                 </div>
                 <div class="col">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="col-4">
-                                <strong class="col-6">Contacto:</strong>
-                                <label t-field="o.partner_id.phone"
-                                    t-options='{"fields": ["phone"], "no_marker": True}' />
-                            </div>
-                        </div>
-                    </div>
+                    <strong class="col-6">Contacto:</strong>
+                    <label t-field="o.partner_id.phone"
+                        t-options='{"fields": ["phone"], "no_marker": True}' />
                 </div>
                 <div class="col">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="col-4">
-                                <strong class="col-6">Dirección:</strong>
-                                <address t-field="o.partner_id"
-                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
-                            </div>
-                        </div>
-                    </div>
+                    <strong class="col-6">Dirección:</strong>
+                    <address t-field="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                </div>
+                <div t-if="o.state" class="col" name="div_sched_date">
+                    <strong>Fecha:</strong>
+                    <p t-field="o.create_date" />
                 </div>
             </div>
         </xpath>
         <xpath expr="//div[hasclass('page')]" position="after">
-            <div class="container overflow-hidden">
-                <div class="row row-cols-2">
-                    <div class="col ">
-                        <div class="m-5">
-                            <div class="col-7">
-                                <div class="row row-cols-1">
-                                    <strong class="col">Recibe conforme:</strong>
-                                    <span class="col">Nombre y Apellido:</span>
-                                    <span class="col">Cédula de Identidad:</span>
-                                    <span class="col">Fecha que Recibe:</span>
-                                    <span class="col">Firma:________________</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="m-5">
-                            <div class="col-7">
-                                <div class="col-7">
-                                    <strong class="col">Entrega conforme:</strong>
-                                    <span>Nombre y Apellido:</span>
-                                    <span>Cédula de Identidad:</span>
-                                    <span>Fecha que Recibe:</span>
-                                    <span>Firma:________________</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <t t-call="domestico.template_sign" />
         </xpath>
     </template>
 </odoo>

@@ -59,7 +59,19 @@ class ResPartner(models.Model):
             'target': 'new',
             'type': 'ir.actions.act_window',
         }
-        
+    
+    def form_user_password(self):
+        return {
+            'name': 'Cambiar contraseña',
+            'res_model': 'change.password.wizard',
+            'view_mode': 'form',
+            'context': {
+                'active_model': 'res.users',
+                'active_ids': self.user_account.id,
+            },
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
     def _compute_display_name(self):
         for record in self:
             record.display_name = record.name if record.name else "Nuevo"

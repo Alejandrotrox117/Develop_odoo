@@ -1,36 +1,45 @@
 <odoo>
     <data>
-                <!--Inventario -->
-            <!-- Menu de operaciones oculto-->
+        <!--Inventario -->
+        <!-- Menu de operaciones oculto-->
         <record model="ir.ui.menu" id="stock.menu_stock_warehouse_mgmt">
-            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
         </record>
-
         <!--Menu nuevo de inventario con las mismas vistas de operaciones -->
         <menuitem id="stock.menu_stock_root" name="Inventario" sequence="1">
+            <menuitem
+                action="stock.stock_picking_type_action"
+                id="stock_picking_type_menu"
+                sequence="0"
+                name="Gestion de Almacenes" />
             <menuitem id="menu_stock_1" name="Inventario">
-                <menuitem id="stock.menu_stock_1" name="Reposición" action="stock.action_orderpoint_replenish"  sequence="1"/>
-                <menuitem id="stock.menu_stock_2" name="Ajustes de Inventario" action="stock.action_view_inventory_tree" sequence="2"/>
-                <menuitem id="stock.menu_stock_3" name="Traspasos" action="stock.action_picking_tree_all" sequence="3"/>
-                <menuitem id="stock.menu_stock_4" name="Desechar" action="stock.action_stock_scrap" sequence="4"/>
-                <menuitem id="stock.menu_stock_5" name="Ejecutar Planificador" action="stock.action_procurement_compute" sequence="5"/>
-            </menuitem>   
-        </menuitem>   
-
-        <menuitem 
+                <menuitem id="stock.menu_stock_1" name="Reposición"
+                    action="stock.action_orderpoint_replenish" sequence="1" />
+                <menuitem id="stock.menu_stock_2" name="Ajustes de Inventario"
+                    action="stock.action_view_inventory_tree" sequence="2" />
+                <menuitem id="stock.menu_stock_3" name="Traspasos"
+                    action="stock.action_picking_tree_all" sequence="3" />
+                <menuitem id="stock.menu_stock_4" name="Desechar" action="stock.action_stock_scrap"
+                    sequence="4" />
+                <menuitem id="stock.menu_stock_5" name="Ejecutar Planificador"
+                    action="stock.action_procurement_compute" sequence="5" />
+            </menuitem>
+        </menuitem>
+        <menuitem
             id="domestico_stock_vendor_menu_root"
             sequence="2"
             name="Proveedores"
             groups="domestico.domestico_group_vendor"
             parent="domestico.domestico_menu_root">
 
-            <menuitem 
-                id="domestico_suppliers_menu" 
-                sequence="3" 
+            <menuitem
+                id="domestico_suppliers_menu"
+                sequence="3"
                 name="Venta productos"
                 action="custom_graph_action" />
-
         </menuitem>
-        
+        <record model="ir.ui.menu" id="stock.stock_picking_type_menu">
+            <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
+        </record>
     </data>
 </odoo>

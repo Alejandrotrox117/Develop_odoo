@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="template_stock_product_tree" model="ir.ui.view">
+            <field name="name">product.stock.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_product_stock_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                   
+                </xpath>
+            </field>
+        </record>
+       
+    </data>
+</odoo>

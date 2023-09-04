@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="template_sign" name="template_report_sign">
+    <div class="container overflow-hidden">
+        <div class="row row-cols-2">
+            <div class="col ">
+                <div class="m-5">
+                    <div class="col-7">
+                        <div class="row row-cols-1">
+                            <strong class="col">Recibe conforme:</strong>
+                            <span class="col">Nombre y Apellido:</span>
+                            <span class="col">Cédula de Identidad:</span>
+                            <span class="col">Fecha que Recibe:</span>
+                            <span class="col">Firma:________________</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="m-5">
+                    <div class="col-7">
+                      
+                            <strong class="col">Entrega conforme:</strong>
+                            <span class="col">Nombre y Apellido:</span>
+                            <span class="col">Cédula de Identidad:</span>
+                            <span class="col">Fecha que Recibe:</span>
+                            <span class="col">Firma:________________</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</template>
+    
+
+
+</odoo>

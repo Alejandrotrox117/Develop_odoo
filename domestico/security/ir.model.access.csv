@@ -8,3 +8,5 @@ access_domestico_sale_order_user,domestico.sale.order.user,sale.model_sale_order
 access_domestico_sale_order_manager,domestico.sale.order.manager,sale.model_sale_order,domestico.domestico_group_manager,1,1,1,1
 access_domestico_profile_user_manager,domestico.profile.user.manager,domestico.model_profile_user,domestico.domestico_group_manager,1,1,1,1
 access_domestico_res_user_groups,domestico.res.user.groups,domestico.model_res_users_groups,base.group_system,1,1,1,1
+access_domestico_profile_user_manager,domestico.profile.user.manager,domestico.model_profile_user,base.group_erp_manager,1,1,1,1
+access_domestico_res_user_groups,domestico.res.user.groups,domestico.model_res_users_groups,base.group_erp_manager,1,1,1,1
