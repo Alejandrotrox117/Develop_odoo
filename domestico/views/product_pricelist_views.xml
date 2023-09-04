@@ -2,69 +2,64 @@
     <data>
 
         <record model="ir.ui.view" id="domestico_product_pricelist_form_inherit">
-          <field name="name">domestico.product.pricelist.form.inherit</field>
-          <field name="model">product.pricelist</field>
-          <field name="inherit_id" ref="product.product_pricelist_view"/>
-          <field name="arch" type="xml">
-            
-            <xpath expr="//field[@name='company_id']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+            <field name="name">domestico.product.pricelist.form.inherit</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
 
-            <xpath expr="//page[@name='pricelist_config']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
 
-            <xpath expr="//field[@name='currency_id']" position="after">
-                <field name="is_pricelist_active" widget="toggle_button"/>
-            </xpath>
+                <xpath expr="//page[@name='pricelist_config']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
 
-            <xpath expr="//field[@name='item_ids']//tree[@groups='!product.group_sale_pricelist']" position="replace">
-                <tree groups="!product.group_sale_pricelist" string="Pricelist Rules" editable="bottom">
-                    <field name="product_tmpl_id" string="Products" required="1" options="{'no_create':1}"/>
-                    <field name="product_id" string="Variants"
-                    groups="product.group_product_variant"
-                    domain="[('product_tmpl_id', '=', product_tmpl_id)]"
-                    options="{'no_create':1}"/>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="is_pricelist_active" widget="toggle_button"/>
+                </xpath>
 
-                    <field name="price_private" />
-                    <field name="price_offert" />
-                    
-                    <field name="min_quantity" invisible="1"/>
-                    <field name="fixed_price" string="Price" invisible="1"/>
-                    <field name="currency_id" invisible="1" />
-                    <field name="pricelist_id" invisible="1"/>
+                <xpath expr="//field[@name='item_ids']//tree[@groups='!product.group_sale_pricelist']" position="replace">
+                    <tree groups="!product.group_sale_pricelist" string="Pricelist Rules" editable="bottom">
+                        <field name="product_tmpl_id" string="Products" required="1" options="{'no_create':1}"/>
+                        <field name="product_id" string="Variants" groups="product.group_product_variant" domain="[('product_tmpl_id', '=', product_tmpl_id)]" options="{'no_create':1}"/>
 
-                    <field name="date_start" invisible="1"/>
-                    <field name="date_end" invisible="1"/>
-                    <field name="base" invisible="1"/>
-                    <field name="applied_on" invisible="1"/>
-                    <field name="company_id" invisible="1"/>
-                </tree>
-            </xpath>
+                        <field name="price_private" />
 
-            <xpath expr="//page[@name='pricelist_rules']" position="after">
-                <page string="Descuento por cliente">
-                    <field name="product_percent_id">
-                        <tree>
-                            <field name="secuence" widget="handle" />
-                            <field name="client_type_id" width="200px"
-                                options="{'no_edit': True, 'no_create': True}" />
-                            <field name="percent" />
-                        </tree>
-                    </field>
-                </page>
-            </xpath>
-          </field>
+                        <field name="min_quantity" invisible="1"/>
+                        <field name="fixed_price" string="Precio PVP" />
+                        <field name="currency_id" invisible="1" />
+                        <field name="pricelist_id" invisible="1"/>
+
+                        <field name="date_start" invisible="1"/>
+                        <field name="date_end" invisible="1"/>
+                        <field name="base" invisible="1"/>
+                        <field name="applied_on" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                </xpath>
+
+                <xpath expr="//page[@name='pricelist_rules']" position="after">
+                    <page string="Descuento por cliente">
+                        <field name="product_percent_id">
+                            <tree>
+                                <field name="secuence" widget="handle" />
+                                <field name="client_type_id" width="200px" options="{'no_edit': True, 'no_create': True}" />
+                                <field name="percent" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
         </record>
 
         <record id="domestico_product_pricelist_action" model="ir.actions.act_window">
-          <field name="name">Ciclos</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">product.pricelist</field>
-          <field name="view_mode">tree,form</field>
+            <field name="name">Ciclos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.pricelist</field>
+            <field name="view_mode">tree,form</field>
         </record>
-        
+
         <record id="product_pricelist_percent_view_form" model="ir.ui.view">
             <field name="name">product.pricelist.percent.view.form</field>
             <field name="model">product.pricelist.percent</field>
@@ -73,13 +68,16 @@
                     <sheet>
                         <div class="oe_title">
                             <h1>
-                                <field name="client_type_id" />
+                                <field name="client_type_id" nolabel="1"/>
                             </h1>
-                            <field name="pricelist_id" readonly="1"/>
+                            <field name="pricelist_id" readonly="1" nolabel="1"/>
                         </div>
+                        <group name="title">
+                            <field name="percent" />
+                        </group>
                         <notebook>
                             <page name="res_partners" string="Clientes">
-                                <field name="partner_ids" >
+                                <field name="partner_ids">
                                     <tree string="Clientes" editable="bottom">
                                         <field name="partner_id" options="{'no_create': True, 'no_edit': True}"/>
                                     </tree>
@@ -114,11 +112,11 @@
             </field>
         </record>
 
-       <record id="res_partner_product_pricelist_percent_action" model="ir.actions.act_window">
-          <field name="name">Rangos</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="res_model">res.partner.product.pricelist.percent</field>
-          <field name="view_mode">kanban</field>
+        <record id="res_partner_product_pricelist_percent_action" model="ir.actions.act_window">
+            <field name="name">Rangos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.product.pricelist.percent</field>
+            <field name="view_mode">kanban</field>
         </record>
 
     </data>

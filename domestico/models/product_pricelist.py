@@ -44,11 +44,11 @@ class ProductPricelist(models.Model):
     _inherit = "product.pricelist.item"
 
     price_private = fields.Float(string="Precio Privado")
-    price_offert = fields.Float(string="Oferta PVP")
+    # fixed_price = fields.Float(string="Oferta PVP")
 
     def _get_price_percent(self, client_percent: ProductPricelistPercent):
         percents = self.pricelist_id.product_percent_id.filtered(lambda percent: percent.secuence <= client_percent.secuence)
         total_percent = sum(percents.mapped("percent")) / 100
-        dif = self.price_offert - self.price_private
-        price = self.price_offert - (dif * total_percent)
+        dif = self.fixed_price - self.price_private
+        price = dif * total_percent
         return price
