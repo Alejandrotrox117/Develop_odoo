@@ -11,7 +11,7 @@
 
     <record model="ir.actions.act_window" id="contacts.action_contacts">
       <field name="name">Directorio</field>
-      <field name="context">{'default_is_company': False}</field>
+      <field name="context">{'default_is_company': False, '_partners_skip_fields_sync': True}</field>
     </record>
 
     <record model="ir.ui.view" id="domestico_res_partner_kanban_fields_inherit">

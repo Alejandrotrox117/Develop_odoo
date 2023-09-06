@@ -93,3 +93,9 @@ class ResPartner(models.Model):
         comercial_fields = super(ResPartner, self)._commercial_fields()
         comercial_fields.remove("vat")
         return comercial_fields
+
+    def onchange_parent_id(self):
+        if self.env.context.get('_partners_skip_fields_sync'):
+            return
+        
+        return super(ResPartner, self).onchange_parent_id()
