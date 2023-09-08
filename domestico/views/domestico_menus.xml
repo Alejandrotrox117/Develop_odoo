@@ -29,12 +29,21 @@
 
         </menuitem>
 
-        <menuitem 
-            id="domestico_product_pricelist_menu_action" 
-            name="Ciclos" 
-            sequence="3"
-            action="domestico.domestico_product_pricelist_action" 
-            groups="domestico.domestico_group_manager"/>
+        <menuitem id="domestico_product_pricelist_menu" name="Ciclos" sequence="3" groups="domestico.domestico_group_manager">
+
+            <menuitem 
+                id="domestico_product_pricelist_action_menu" 
+                name="Ciclo" 
+                sequence="1" 
+                action="domestico.domestico_product_pricelist_action"/>
+
+            <menuitem 
+                id="domestico_res_partner_product_pricelist_percent_action" 
+                name="Rangos" 
+                sequence="2" 
+                action="domestico.res_partner_product_pricelist_percent_action"/>
+
+        </menuitem>
 
         <menuitem 
             id="domestico_config_menu_root" 

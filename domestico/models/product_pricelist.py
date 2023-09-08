@@ -14,6 +14,18 @@ class ProductPricelistPercent(models.Model):
 
     pricelist_id = fields.Many2one('product.pricelist')
 
+    partner_ids = fields.One2many('res.partner.product.pricelist.percent', 'pricelist_percent_id', string="Clientes")
+    
+class PartnerProductPricelistPercent(models.Model):
+    _name = "res.partner.product.pricelist.percent"
+    _description = "Res partner percent product pricelist"
+
+    partner_id = fields.Many2one('res.partner', string="Usuarios")
+    
+    pricelist_percent_id = fields.Many2one('product.pricelist.percent', string="Rango")
+    client_type_id = fields.Many2one('client.type',string="Rango", related='pricelist_percent_id.client_type_id', store=True)
+    pricelist_id = fields.Many2one('product.pricelist', string="Ciclo", related='pricelist_percent_id.pricelist_id')
+
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 
@@ -32,11 +44,11 @@ class ProductPricelist(models.Model):
     _inherit = "product.pricelist.item"
 
     price_private = fields.Float(string="Precio Privado")
-    price_offert = fields.Float(string="Oferta PVP")
+    # fixed_price = fields.Float(string="Oferta PVP")
 
     def _get_price_percent(self, client_percent: ProductPricelistPercent):
         percents = self.pricelist_id.product_percent_id.filtered(lambda percent: percent.secuence <= client_percent.secuence)
         total_percent = sum(percents.mapped("percent")) / 100
-        dif = self.price_offert - self.price_private
-        price = self.price_offert - (dif * total_percent)
+        dif = self.fixed_price - self.price_private
+        price = dif * total_percent
         return price
