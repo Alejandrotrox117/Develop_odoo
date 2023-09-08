@@ -1,52 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="report_invoice_custom" inherit_id="account.report_invoice_document">
+        <!--Impuestos -->
+        <xpath expr="//tr/th[@name='th_taxes']/span" position="replace">
+
+        </xpath>
+        <!--Terminos de pago -->
         <xpath expr="//p[@name='payment_communication']" position="replace">
         </xpath>
-       
-        <xpath expr="//tr/th[@name='th_taxes']/span" position="replace">
+        <!-- Detalles de termino de pago-->
+        <xpath expr="//t[@t-set='payment_term_details']" position="replace">
+        </xpath>
+        <xpath expr="//div[@name='payment_term']" position="replace">
+        </xpath>
+        <!-- -->
+        <xpath expr="//span[@id='line_tax_ids']" position="replace">
+        </xpath>
+
+        <xpath expr="//div[@id='informations']" position="replace">
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']" position="replace">
+            <table class="table table-sm o_main_table table-borderless" name="invoice_line_table">
+                <thead>
+                    <tr>
+                        <th name="th_description" class="text-start">
+                            <span>Description</span>
+                        </th>
+                        <th name="th_quantity" class="text-end">
+                            <span>Quantity</span>
+                        </th>
+                        <th name="th_priceunit"
+                            t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                            <span>Precio Oferta</span>
+                        </th>
+                        <th name="th_price_unit" t-if="display_discount"
+                            t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                            <span>Disc.%</span>
+                        </th>
+                        <!-- <th name="th_taxes" t-attf-class="text-start {{ 'd-none
+                        d-md-table-cell' if report_type == 'html' else ''
+                        }}"><span>Taxes</span></th> -->
+                        <th name="th_subtotal" class="text-end">
+                            <span groups="account.group_show_line_subtotals_tax_excluded">Precio
+                                Total</span>
+                            <span groups="account.group_show_line_subtotals_tax_included">Total </span>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <t t-set="current_subtotal" t-value="0" />
+                    <t t-set="lines"
+                        t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)" />
+
+                    <t t-foreach="lines" t-as="line">
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                            groups="account.group_show_line_subtotals_tax_excluded" />
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                            groups="account.group_show_line_subtotals_tax_included" />
+
+                        <tr
+                            t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                            <t t-if="line.display_type == 'product'"
+                                name="account_invoice_line_accountable">
+                                <td name="account_invoice_line_name">
+                                    <span t-field="line.name" t-options="{'widget': 'text'}" />
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="line.quantity" />
+                                    <span t-field="line.product_uom_id" groups="uom.group_uom" />
+                                </td>
+                                <td
+                                    t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    <span class="text-nowrap" t-field="line.price_unit" />
+                                </td>
+                                <td t-if="display_discount"
+                                    t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    <span class="text-nowrap" t-field="line.discount" />
+                                </td>
+                                <!-- <td t-attf-class="text-start {{ 'd-none d-md-table-cell' if
+                                report_type == 'html' else '' }}">
+                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
+                                </td> -->
+                                <td class="text-end o_price_total">
+                                    <span class="text-nowrap" t-field="line.price_subtotal"
+                                        groups="account.group_show_line_subtotals_tax_excluded" />
+                                    <span class="text-nowrap" t-field="line.price_total"
+                                        groups="account.group_show_line_subtotals_tax_included" />
+                                </td>
+                            </t>
+                            <t t-if="line.display_type == 'line_section'">
+                                <td colspan="99">
+                                    <span t-field="line.name" t-options="{'widget': 'text'}" />
+                                </td>
+                                <t t-set="current_section" t-value="line" />
+                                <t t-set="current_subtotal" t-value="0" />
+                            </t>
+                            <t t-if="line.display_type == 'line_note'">
+                                <td colspan="99">
+                                    <span t-field="line.name" t-options="{'widget': 'text'}" />
+                                </td>
+                            </t>
+                        </tr>
+
+                        <t
+                            t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
+                            <tr class="is-subtotal text-end">
+                                <td colspan="99">
+                                    <strong class="mr16">Subtotal</strong>
+                                    <span
+                                        t-esc="current_subtotal"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+
         </xpath>
 
         <xpath expr="//div[hasclass('row')]" position="replace">
-            <div style="margin-bottom:-40px;margin-top:0px">
-                <h4 class="" style="margin-left:28px">Datos del cliente</h4>
-                <div class="row row-cols-1">
-                    <div class="col-2">
-                        <strong class="">Nombre y Apellido:</strong>
+            <div style="margin-bottom:-50px;margin-top:0px">
+                <div class="container">
+                    <div class="row row-cols-1 ">
+                        <div class="col-3">
+                            <strong class="col-6">Nombre y Apellido:</strong>
+                            <span t-field="o.partner_id"
+                                t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <span class="text-left" t-field="o.partner_id"
-                            t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                    <div class="col">
+                        <strong class="col-6">Cédula de identidad:</strong>
+                        <span t-field="o.partner_id.ci"
+                            t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
                     </div>
-                </div>
-                <div class="col">
-                    <strong class="col-6">Cédula de identidad:</strong>
-                    <span t-field="o.partner_id.ci"
-                        t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">RIF:</strong>
-                    <span t-field="o.partner_id.vat"
-                        t-options='{"fields": ["o.partner_id.vat"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">Contacto:</strong>
-                    <label t-field="o.partner_id.phone"
-                        t-options='{"fields": ["phone"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">Dirección:</strong>
-                    <address t-field="o.partner_id"
-                        t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
-                </div>
-                <div t-if="o.state" class="col" name="div_sched_date">
-                    <strong>Fecha:</strong>
-                    <p t-field="o.create_date" />
+                    <div class="col">
+                        <strong class="col-6">RIF:</strong>
+                        <span t-field="o.partner_id.vat"
+                            t-options='{"fields": ["o.partner_id.vat"], "no_marker": True}' />
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">Contacto:</strong>
+                        <label t-field="o.partner_id.phone"
+                            t-options='{"fields": ["phone"], "no_marker": True}' />
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">Dirección:</strong>
+                        <address t-field="o.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                    </div>
+
+                    <div t-if="o.state" class="col" name="div_sched_date">
+                        <strong class="col-6">Fecha:</strong>
+                        <p t-field="o.create_date" />
+                    </div>
+
+
                 </div>
             </div>
         </xpath>
+        <!--Firma conformes -->
         <xpath expr="//div[hasclass('page')]" position="after">
             <t t-call="domestico.template_sign" />
+        </xpath>
+    </template>
+
+    <template id="document_logo" inherit_id="web.external_layout_boxed">
+        <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
+            <div class="row">
+                <div class="col-6 ">
+                    <img t-if="company.logo" style="width:300px;margin-left:250px;margin-top:-29px"
+                        t-att-src="image_data_uri(company.logo)" alt="Logo" />
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-att-data-oe-model='o and o._name']" position="replace">
+
+            <div
+                t-attf-class="article o_report_layout_boxed o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+                t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <style>
+
+                    .o_report_layout_background {
+
+                    width:1050px;
+                    height:1210px;
+
+
+                    }
+                </style>
+                <div class="pt-0">
+                    <!-- This div ensures that the address is not cropped by the header. -->
+                    <t t-call="web.address_layout" />
+                </div>
+                <t t-out="0" />
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-attf-class='footer o_boxed_footer o_company_#{company.id}_layout']"
+            position="replace">
+
+        </xpath>
+    </template>
+    <!--DEscuentos arriba de monto total en el reporte -->
+    <template inherit_id="account.document_tax_totals" id="document_taxes">
+        <xpath expr="//t[@t-as='subtotal']" position="replace">
         </xpath>
     </template>
 </odoo>
