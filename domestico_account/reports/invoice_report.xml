@@ -188,8 +188,9 @@
 
                     .o_report_layout_background {
 
-                    width:1050px;
+                    width:1090px;
                     height:1210px;
+                    font-size:15px;
 
 
                     }

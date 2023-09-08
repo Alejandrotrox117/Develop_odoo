@@ -1,40 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<template id="template_sign" name="template_report_sign">
-    <div class="container overflow-hidden">
-        <div class="row row-cols-2">
-            <div class="col ">
-                <div class="m-5">
-                    <div class="col-7">
-                        <div class="row row-cols-1">
-                            <strong class="col">Recibe conforme:</strong>
-                            <span class="col">Nombre y Apellido:</span>
-                            <span class="col">Cédula de Identidad:</span>
-                            <span class="col">Fecha que Recibe:</span>
-                            <span class="col">Firma:________________</span>
+    <template id="template_sign" name="template_report_sign">
+        <div class="container overflow-hidden">
+            <div class="row row-cols-2">
+
+                <div class="col">
+
+                    <div class="m-5">
+                        <strong class="text-end" style="margin-left:20px">Recibe conforme:</strong>
+
+                        <div class="col-12"> <!-- Cambiado a col-12 para ocupar el ancho completo -->
+                            <div class="row row-cols-1">
+                                <div class="col-12 p-1">
+                                    <div class="col-12 p-1 ">
+
+                                        <span>Nombre y Apellido:______________________</span>
+                                    </div>
+                                    <div class="col-12 p-1 ">
+
+                                        <span>Cédula de Identidad:____________________</span>
+
+                                    </div>
+                                    <div class="col-12 p-1"> <!-- Cambiado a div para permitir el
+                                        ajuste del contenido -->
+                                        <span>Fecha que Recibe:_______________________</span>
+
+                                    </div>
+                                    <div class="col-12 p-1"> <!-- Cambiado a div para permitir el
+                                        ajuste del contenido -->
+                                        <span>Firma:_____________________</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="m-5">
+                        <div class="col-7">
+                            <table class="table table-sm o_main_table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Despachado por
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="height: 160px;"> <!-- Espacio en blanco de 20
+                                            píxeles -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="m-5">
-                    <div class="col-7">
-                      
-                            <strong class="col">Entrega conforme:</strong>
-                            <span class="col">Nombre y Apellido:</span>
-                            <span class="col">Cédula de Identidad:</span>
-                            <span class="col">Fecha que Recibe:</span>
-                            <span class="col">Firma:________________</span>
-                        
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-    
-</template>
-    
+
+    </template>
 
 
 </odoo>

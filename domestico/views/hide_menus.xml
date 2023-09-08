@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!---->
         <record model="ir.ui.menu" id="base.menu_management">
             <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
         </record>
+        <!--Acceso directo a las apps -->
         <record model="ir.ui.menu" id="base.menu_apps">
             <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
         </record>
@@ -34,9 +36,8 @@
          <record model="ir.ui.menu" id="stock.menu_stock_root" >
             <field name="sequence" eval="2"/>
         </record>
-        <record model="ir.ui.menu" id="account.menu_finance" >
-            <field name="sequence" eval="3"/>
-        </record>
-        
+       
+     
+     
     </data>
 </odoo>
