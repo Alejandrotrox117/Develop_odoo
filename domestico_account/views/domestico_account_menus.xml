@@ -2,9 +2,10 @@
     <data>
 
         <!--Menus de pagos en facturacion -->
-        <menuitem id="account.menu_finance" name="Facturación" sequence="10">
+        <menuitem id="account.menu_finance" name="Facturación" sequence="3">
 
-            <!--Menu nuevo en facturacion que contiene el acceso directo a las facturas -->
+            <!--Menu
+            nuevo en facturacion que contiene el acceso directo a las facturas -->
 
             <menuitem id="menu_inicio_1" name="Inicio" sequence="1">
 
@@ -14,7 +15,8 @@
                     action="account.action_move_out_refund_type" />
             </menuitem>
 
-            <!--Menu de pagos despues de inicio -->
+            <!--Menu
+            de pagos despues de inicio -->
             <menuitem id="menu_sub_1" name="Pagos" sequence="2">
 
                 <menuitem id="account.menu_sub_1" name="Pagos"
@@ -57,11 +59,13 @@
         <record model="ir.ui.menu" id="account.menu_finance_payables">
             <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
         </record>
-        <!--Pagos en clientes -->
+        <!--Pagos
+        en clientes -->
         <record model="ir.ui.menu" id="account.menu_action_account_payments_receivable">
             <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
         </record>
-        <!--Boton de clientes -->
+        <!--Boton
+        de clientes -->
         <record model="ir.ui.menu" id="account.menu_finance_receivables">
             <field name="groups_id" eval="[(6,0,[ref('domestico.make_invisible')])]" />
         </record>

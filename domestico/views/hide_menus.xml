@@ -36,7 +36,7 @@
          <record model="ir.ui.menu" id="stock.menu_stock_root" >
             <field name="sequence" eval="2"/>
         </record>
-       
+      
      
      
     </data>

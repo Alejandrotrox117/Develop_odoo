@@ -13,6 +13,9 @@
         <xpath expr="//th[@name='th_sml_product']" position="after">
             <th>Cubicaje</th>
         </xpath>
+      
+            <xpath expr="//div[@name='div_origin']" position="replace">
+            </xpath>
         <xpath expr="//div[@name='div_outgoing_address']" position="replace">
         </xpath>
         <xpath expr="//div[@name='div_sched_date']" position="replace">
@@ -31,14 +34,14 @@
 
         <xpath expr="//div[hasclass('page')]" position="before">
             <div style="margin-bottom:-20px;margin-top:-5px">
-                <h4 class="" style="margin-left:28px">Datos del cliente</h4>
-                <div class="row row-cols-1">
-                    <div class="col-2">
+                 <div class="row row-cols-1">
+                    <div class="col">
                         <strong class="">Nombre y Apellido:</strong>
+                        <div class="col">
+                            <span t-field="o.move_ids[0].partner_id.name" />
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <span t-field="o.move_ids[0].partner_id.name" />
-                    </div>
+                    
                 </div>
                 <div class="col">
                     <strong class="col-6">Cédula de identidad:</strong>
