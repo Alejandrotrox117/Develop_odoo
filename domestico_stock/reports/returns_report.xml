@@ -33,46 +33,54 @@
         </xpath>
 
         <xpath expr="//div[hasclass('page')]" position="before">
-            <div style="margin-bottom:-20px;margin-top:-5px">
-                 <div class="row row-cols-1">
-                    <div class="col">
-                        <strong class="">Nombre y Apellido:</strong>
-                        <div class="col">
+            <div style="margin-bottom:-15px;margin-top:0px">
+                <div class="container">
+                    <div class="row row-cols-1 ">
+                        <div class="col-3">
+                            <strong class="col-6">Nombre y Apellido:</strong>
                             <span t-field="o.move_ids[0].partner_id.name" />
                         </div>
                     </div>
-                    
-                </div>
-                <div class="col">
-                    <strong class="col-6">Cédula de identidad:</strong>
-                    <span t-field="o.partner_id.ci"
+                    <div class="col">
+                        <strong class="col-6">Cédula de identidad:</strong>
+                        <span t-field="o.partner_id.ci"
                         t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">RIF:</strong>
-                    <span t-field="o.partner_id.vat"
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">RIF:</strong>
+                        <span t-field="o.partner_id.vat"
                         t-options='{"fields": ["o.partner_id.ci"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">Contacto:</strong>
-                    <label t-field="o.partner_id.phone"
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">Contacto:</strong>
+                        <label t-field="o.partner_id.phone"
                         t-options='{"fields": ["phone"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">Dirección:</strong>
-                    <address t-field="o.partner_id"
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">Dirección:</strong>
+                        <address t-field="o.partner_id"
                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
-                </div>
-                <div t-if="o.state" class="col" name="div_sched_date">
-                    <strong>Fecha:</strong>
-                    <t t-if="o.state == 'done'">
-                        <p t-field="o.date_done" />
-                    </t>
-                    <t t-if="o.state != 'done'">
-                        <p t-field="o.scheduled_date" />
-                    </t>
+                    </div>
+
+                    <div t-if="o.state" class="col" name="div_sched_date">
+                        <strong class="col-6">Fecha:</strong>
+                        <p t-field="o.create_date" />
+                    </div>
+
+
                 </div>
             </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+           
+           
         </xpath>
 
         <xpath expr="//div[hasclass('page')]" position="after">
