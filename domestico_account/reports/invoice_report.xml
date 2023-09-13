@@ -13,7 +13,7 @@
         </xpath>
         <xpath expr="//div[@name='payment_term']" position="replace">
         </xpath>
-        <!-- -->
+        <!--Descuentos -->
         <xpath expr="//span[@id='line_tax_ids']" position="replace">
         </xpath>
 
@@ -25,10 +25,10 @@
                 <thead>
                     <tr>
                         <th name="th_description" class="text-start">
-                            <span>Description</span>
+                            <span>Descripción</span>
                         </th>
                         <th name="th_quantity" class="text-end">
-                            <span>Quantity</span>
+                            <span>Cantidad</span>
                         </th>
                         <th name="th_priceunit"
                             t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
@@ -121,7 +121,7 @@
             </table>
 
         </xpath>
-
+<!-- Inicio de datos personales-->
         <xpath expr="//div[hasclass('row')]" position="replace">
             <div style="margin-bottom:-50px;margin-top:0px">
                 <div class="container">
@@ -167,7 +167,7 @@
             <t t-call="domestico.template_sign" />
         </xpath>
     </template>
-
+<!-- Logo principal y marca de agua-->
     <template id="document_logo" inherit_id="web.external_layout_boxed">
         <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
             <div class="row">
@@ -188,8 +188,8 @@
 
                     .o_report_layout_background {
 
-                    width:1090px;
-                    height:1210px;
+                    width:1050px;
+                    height:1200px;
                     font-size:15px;
 
 

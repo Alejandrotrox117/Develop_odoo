@@ -1,4 +1,5 @@
 <odoo>
+    <!-- Template de sale order modulo domestico-->
     <template id="sale_order_report_custom" inherit_id="sale.report_saleorder_document">
         <xpath expr="//td[@name='td_taxes']"
             position="replace">
@@ -17,49 +18,58 @@
         </xpath>
         <xpath expr="//t[@t-set='information_block']" position="replace">
         </xpath>
-        
+        <!-- Fecha de orden-->
+        <xpath
+            expr="//div[@name='informations_date']" position="replace">
+        </xpath>
+
+
+
         <xpath expr="//div[hasclass('page')]" position="before">
-            <div style="margin-bottom:-40px;margin-top:0px">
-                <h4 class="" style="margin-left:28px">Datos del cliente</h4>
-                <div class="row row-cols-1">
-                    <div class="col-2">
-                        <strong class="">Nombre y Apellido:</strong>
-                    </div>
-                    <div class="col-3">
-                        <span class="text-left" t-field="doc.partner_id"
+            <div style="margin-bottom:-20px;margin-top:0px">
+                <div class="container">
+                    <div class="row row-cols-1 ">
+                        <div class="col-3">
+                            <strong class="col-6">Nombre y Apellido:</strong>
+                            <span t-field="doc.partner_id"
                             t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <strong class="col-6">Cédula de identidad:</strong>
-                    <span t-field="doc.partner_id.ci"
+                    <div class="col">
+                        <strong class="col-6">Cédula de identidad:</strong>
+                        <span t-field="doc.partner_id.ci"
                         t-options='{"fields": ["doc.partner_id.ci"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">RIF:</strong>
-                    <span t-field="doc.partner_id.vat"
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">RIF:</strong>
+                        <span t-field="doc.partner_id.vat"
                         t-options='{"fields": ["doc.partner_id.vat"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">Contacto:</strong>
-                    <label t-field="doc.partner_id.phone"
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">Contacto:</strong>
+                        <label t-field="doc.partner_id.phone"
                         t-options='{"fields": ["phone"], "no_marker": True}' />
-                </div>
-                <div class="col">
-                    <strong class="col-6">Dirección:</strong>
-                    <address t-field="doc.partner_id"
+                    </div>
+                    <div class="col">
+                        <strong class="col-6">Dirección:</strong>
+                        <address t-field="doc.partner_id"
                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
-                </div>
-                <div t-if="doc.state" class="col" name="div_sched_date">
-                    <strong>Fecha:</strong>
-                    <p t-field="doc.create_date" />
+                    </div>
+
+                    <div t-if="doc.state" class="col" name="div_sched_date">
+                        <strong class="col-6">Fecha:</strong>
+                        <p t-field="doc.create_date" />
+                    </div>
+
+
                 </div>
             </div>
-            
         </xpath> 
-        <xpath expr="//div[hasclass('page')]" position="after">
-                <t t-call="domestico.template_sign" />
-           
+        <!-- Template de firma-->
+        <xpath expr="//div[@name='so_total_summary']" position="after">
+                <div class="m-5">
+            <t  t-call="domestico.template_sign" />
+        </div>
         </xpath>
     </template>
 </odoo>
