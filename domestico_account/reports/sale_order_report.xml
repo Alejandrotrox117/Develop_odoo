@@ -24,6 +24,103 @@
         </xpath>
 
 
+        <xpath expr="//table[hasclass('table')]" position="replace">
+            <t t-set="total_quantity" t-value="0"/>
+
+<table class="table table-sm o_main_table table-borderless mt-4">
+    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+    <thead style="display: table-row-group">
+        <tr>
+            <th class="text-center">
+                <span>N॰</span>
+            </th>
+            <th name="th_description" class="text-start">Descripción</th>
+            <th name="th_quantity" class="text-end">Cantidad</th>
+            <th name="th_priceunit" class="text-end">Precio Oferta</th>
+            <th name="th_discount" t-if="display_discount" class="text-end" groups="product.group_discount_per_so_line">
+                <span>Disc.%</span>
+            </th>
+            <th name="th_subtotal" class="text-end">
+                <span groups="account.group_show_line_subtotals_tax_excluded">Total Precio</span>
+                <span groups="account.group_show_line_subtotals_tax_included">Total</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="sale_tbody">
+
+        <t t-foreach="lines_to_report" t-as="line">
+            <t t-set="total_quantity" t-value="total_quantity + line.product_uom_qty"/>
+
+            <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                <t t-if="not line.display_type">
+                    <!-- Numeracion de producto -->
+                    <td class="text-center text-black">
+                        <span class="text-center" t-esc="line_index + 1" />
+                    </td>
+                    <td name="td_name" class="text-black" >
+                        <span t-field="line.name"/>
+                    </td>
+                    <td name="td_quantity" class="text-end text-black">
+                        <span t-field="line.product_uom_qty"/>
+                        <span t-field="line.product_uom"/>
+                    </td>
+                    <td name="td_priceunit" class="text-end text-black">
+                        <span t-field="line.price_unit"/>
+                    </td>
+                    <td t-if="display_discount" class="text-end text-black" groups="product.group_discount_per_so_line">
+                        <span t-field="line.discount"/>
+                    </td>
+                    <td t-if="not line.is_downpayment" name="td_subtotal" class="text-end o_price_total text-black">
+                        <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                    </td>
+                </t>
+                <t t-elif="line.display_type == 'line_section'">
+                    <td name="td_section_line" colspan="99">
+                        <span t-field="line.name"/>
+                    </td>
+                    <t t-set="current_section" t-value="line"/>
+                    <t t-set="current_subtotal" t-value="0"/>
+                </t>
+                <t t-elif="line.display_type == 'line_note'">
+                    <td name="td_note_line" colspan="99">
+                        <span t-field="line.name"/>
+                    </td>
+                </t>
+            </tr>
+
+            <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section') and not line.is_downpayment">
+                <tr class="is-subtotal text-end">
+                    <td name="td_section_subtotal" colspan="99">
+                        <strong class="mr16">Subtotal</strong>
+                        <span
+                            t-out="current_subtotal"
+                            t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                        />
+                    </td>
+                </tr>
+            </t>
+        </t>
+    </tbody>
+</table>
+
+            <table class="text-end table table-m" style="width:250px;margin-left:0px" >
+                <thead>
+                    <tr colspan="99">
+                        <th>
+
+                            <p>Total de productos: <span t-esc="total_quantity"/></p>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            
+        </xpath>
+
+
+
+
+
 
         <xpath expr="//div[hasclass('page')]" position="before">
             <div style="margin-bottom:-20px;margin-top:0px">
