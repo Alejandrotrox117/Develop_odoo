@@ -50,5 +50,17 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="domestico_stock_inherit_product_product" model="ir.ui.view">
+            <field name="name">product.product.view.kanban.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//ul" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>        
+            </field>
+        </record>
+
     </data>
 </odoo>
