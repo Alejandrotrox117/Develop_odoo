@@ -12,6 +12,7 @@
         'views/product_template_view.xml',
         'views/product_product_view.xml',
         'views/product_pricelist_views.xml',
+        'views/stock_picking_views.xml',
         'views/domestico_proveedores.xml',
         'views/domestico_stock_menus.xml',
         
