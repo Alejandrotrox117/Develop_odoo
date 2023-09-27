@@ -16,13 +16,13 @@
 
             <menuitem 
                 id="domestico_product_assignment_solic_menu_action" 
-                name="Solicitudes"
+                name="Solicitudes de Electrodomestico"
                 sequence="1"
                 action="domestico.domestico_product_assignment_solic_action"/>
 
             <menuitem 
                 id="domestico_product_assignment_menu_action" 
-                name="Asignación" 
+                name="Asignación de Electrodomestico" 
                 sequence="2" 
                 action="domestico.domestico_product_assignment_action" 
                 groups="domestico.domestico_group_manager"/>
