@@ -3,15 +3,6 @@ from odoo.exceptions import ValidationError, Warning
 
 from datetime import datetime
 
-# class Import(models.TransientModel):
-#     _inherit = 'base_import.import'
-
-#     def execute_import(self, fields, columns, options, dryrun=False):
-#         import_result = super(Import, self).excute_import(fields, columns, options, dryrun)
-#         if self.res_model == 'account.payment':
-#             for result in import_result['messages']:
-#                 if result['type'] == 'error' and result['field'] == 'journal_id':
-
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
     
@@ -23,12 +14,14 @@ class AccountPayment(models.Model):
     file_ref = fields.Binary()
     filename = fields.Char(string='Comprobante')
 
-    reference = fields.Char(string="Referencia", required=True)
+    reference = fields.Char(string="Referencia")
 
     create_by = fields.Many2one('res.users', default=lambda self: self.env.user.id)
 
     bank_acc_number = fields.Char(string="Número de cuenta", compute='_compute_bank_acc_number', inverse='_inverse_bank_acc_number')
     
+    journal_type = fields.Char(compute='_compute_journal_type')
+
     _sql_constraints = [
         ('reference_uniq', 'unique(reference)', 'La referencia ya se ha registrado anteriormente')
     ]
@@ -76,23 +69,23 @@ class AccountPayment(models.Model):
         for record in self:
             if record.journal_id:
                 record.bank_acc_number = record.journal_id.bank_account_id.acc_number
-    
+
+    @api.depends('journal_id')
+    def _compute_journal_type(self):
+        for record in self:
+            record.journal_type = record.journal_id.type
+
     ##### INVERSE ######
     def _inverse_bank_acc_number(self):
         for record in self:
             if record.bank_acc_number:
                 record.journal_id = self._get_journal_acc_numbe(record.bank_acc_number)
 
-    def _valid_user_match(self):
-        is_valid = self.create_uid.id != self.env.user.id
-
-        return is_valid
-
     #### CONSTRAINTS ####
     @api.constrains('bank_id', 'journal_id')
     def _constrain_currency_bank(self):
         for record in self:
-            if record.bank_id.currency_id.id != record.journal_id.currency_id.id:
+            if record.bank_id.currency_id.id != record.journal_id.currency_id.id and record.journal_id.type == 'bank':
                 raise ValidationError('La transacción no puede ser realizada debido a que las moneda de los bancos no coinciden.')
 
     # @api.constrains('partner_id')
@@ -107,6 +100,7 @@ class AccountPayment(models.Model):
     ##### CRUD Functions ######
     @api.model
     def create(self, vals_list):
+        #si es importado
         if self.env.context.get('import_file'):
             payments = self.env['account.payment.method.line']
             payment_name = payments.browse(vals_list['payment_method_line_id']).name
@@ -116,11 +110,16 @@ class AccountPayment(models.Model):
             vals_list['journal_id'] = journal_id.id
             
             payment = super(AccountPayment, self).create(vals_list)
+
             if not 'partner_id' in vals_list:
                 payment.partner_id = False
 
             return payment
-
+        #validamos si el pago es de tipo efectivo
+        if 'journal_id' in vals_list:
+            if self.env['account.journal'].browse(vals_list['journal_id']).type == 'cash':
+                return super(AccountPayment, self).create(vals_list)
+        #validamos si el pago fue registrado previamente
         payment = self.search(
             [
                 ('state', '=', 'draft'),
@@ -132,8 +131,9 @@ class AccountPayment(models.Model):
                 ('date', '=', datetime.strptime(vals_list['date'], "%Y-%m-%d")),
             ]
         )
-
-        if payment and payment._valid_user_match():
+        # if payment and payment.create_uid.id != self.env.user.id:
+        if payment:
+            payment.partner_id = vals_list['partner_id'] if 'partner_id' in vals_list else self.env.user.partner_id.id
             payment.action_post()
             return payment 
         else:
