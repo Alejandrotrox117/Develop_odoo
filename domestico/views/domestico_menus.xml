@@ -11,7 +11,7 @@
         <menuitem 
             id="domestico_client_menu_root" 
             name="Cientes"
-            groups="domestico.domestico_group_user,"
+            groups="domestico.domestico_group_user"
             sequence="1">
 
             <menuitem 
