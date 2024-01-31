@@ -64,7 +64,8 @@
 
             <xpath expr="//group[@name='group1']" position="inside">
                 <field name="is_internacional_bank" invisible="1"/> 
-                <field name="reference" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="journal_type" invisible="1"/> 
+                <field name="reference" attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('journal_type', '!=', 'cash')]}"/>
                 <label for="file_ref" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                   <div name="reference_div" class="o_row" >
                       <field name="filename" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
