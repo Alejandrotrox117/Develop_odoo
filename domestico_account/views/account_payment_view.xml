@@ -115,14 +115,14 @@
           <field name="name">Pagos nacionales</field>
           <field name="type">ir.actions.act_window</field>
           <field name="res_model">account.payment</field>
-          <field name="context">{'search_default_payment_national': True}</field>
+          <field name="context">{'search_default_payment_national': True, 'default_is_internacional_bank': False}</field>
           <field name="view_mode">tree,form</field>
         </record>
 
         <record id="domestico_account_payment_international_action" model="ir.actions.act_window">
           <field name="name">Pago Internacionales</field>
           <field name="type">ir.actions.act_window</field>
-          <field name="context">{'search_default_payment_international': True}</field>
+          <field name="context">{'search_default_payment_international': True, 'default_is_internacional_bank': True}</field>
           <field name="res_model">account.payment</field>
           <field name="view_mode">tree,form</field>
         </record>

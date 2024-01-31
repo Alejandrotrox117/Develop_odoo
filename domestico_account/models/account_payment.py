@@ -7,7 +7,8 @@ class AccountPayment(models.Model):
     _inherit = 'account.payment'
     
     bank_id = fields.Many2one('res.bank', string="Banco")
-    is_internacional_bank = fields.Boolean(store=True, compute="_compute_is_internacional_bank")
+    is_internacional_bank = fields.Boolean(store=True, compute="_compute_is_internacional_bank",
+                                            inverse="_inverse_is_internacional_bank")
 
     partner_id = fields.Many2one(default=lambda self: self.env.user.partner_id)
 
@@ -33,18 +34,27 @@ class AccountPayment(models.Model):
     @api.depends('bank_id')
     def _compute_currency_id(self):
         for record in self:
-            if record.bank_id:
-                record.currency_id = record.bank_id.currency_id
-            else:
-                super(AccountPayment, self)._compute_currency_id()
+            if record.is_internacional_bank:
+                record.currency_id = self.env.ref('base.USD').id
+            else: 
+                record.currency_id = self.env.ref('base.VES').id
+            # else:
+            #     super(AccountPayment, self)._compute_currency_id()
                 
     @api.depends('currency_id')
     def _compute_is_internacional_bank(self):
         for record in self:
             if record.bank_id:
-                usd_id = self.env['res.currency'].search([('name', '=', 'VES')])
+                usd_id = self.env.ref('base.USD')
 
-                record.is_internacional_bank = record.currency_id.id != usd_id.id
+                record.is_internacional_bank = record.currency_id.id == usd_id.id
+
+    def _inverse_is_internacional_bank(self):
+        for record in self:
+            if record.is_internacional_bank:
+                record.currency_id = self.env.ref('base.USD').id
+            else: 
+                record.currency_id = self.env.ref('base.VES').id
 
     @api.constrains('bank_id', 'journal_id')
     def _constrain_currency_bank(self):
